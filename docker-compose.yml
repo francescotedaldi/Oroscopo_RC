@@ -25,7 +25,8 @@ services:
       dockerfile: Dockerfile
     working_dir: /usr/src/app
     volumes:
-      - .:/usr/src/app
+      - ./src:/usr/src/app/src
+      - ./node_modules:/usr/src/app/node_modules
     ports:
       - "3000"
     environment:
@@ -39,7 +40,8 @@ services:
       dockerfile: Dockerfile
     working_dir: /usr/src/app
     volumes:
-      - .:/usr/src/app
+      - ./src:/usr/src/app/src
+      - ./node_modules:/usr/src/app/node_modules
     ports:
       - "3000"
     environment:
@@ -53,7 +55,8 @@ services:
       dockerfile: Dockerfile
     working_dir: /usr/src/app
     volumes:
-      - .:/usr/src/app
+      - ./src:/usr/src/app/src
+      - ./node_modules:/usr/src/app/node_modules
     ports:
       - "3000"
     environment:
