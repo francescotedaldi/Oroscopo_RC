@@ -74,7 +74,7 @@ services:
       - ./src:/usr/src/app/src
       - ./node_modules:/usr/src/app/node_modules
     ports:
-      - "3000"
+      - "5984:5984"
     environment:
       - COUCHDB_USER=admin
       - COUCHDB_PASSWORD=admin
