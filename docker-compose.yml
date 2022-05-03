@@ -10,6 +10,7 @@ services:
       - node1:node1
       - node2:node2
       - node3:node3
+      - couchdb1:couchdb1
     depends_on:
       - node1
       - node2
@@ -61,6 +62,22 @@ services:
       - "3000"
     environment:
       - INSTANCE=node3
+    networks:
+      - app-network
+
+  couchdb1:
+    build:
+      context: .
+      dockerfile: database.dockerfile
+    working_dir: /usr/src/app
+    volumes:
+      - ./src:/usr/src/app/src
+      - ./node_modules:/usr/src/app/node_modules
+    ports:
+      - "3000"
+    environment:
+      - COUCHDB_USER=admin
+      - COUCHDB_PASSWORD=admin
     networks:
       - app-network
 
