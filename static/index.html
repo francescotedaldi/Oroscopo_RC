@@ -1,12 +1,37 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>Home Page</title>
+    <title>Oroscopo RC</title>
 </head>
+
 <body>
 
-<h1>Titolo!</h1>
-<p>Questa è la pagina principale!</p>
+    <h1>Oroscopo Reti di Calcolatori</h1>
+    <p>Questa è la pagina principale!</p>
+
+    <br> Scegli un segno zodiacale:
+    <select name="regione" required>
+        <option> ... </option>
+        <option value="aries">aries</option>
+        <option value="aquarius">aquarius</option>
+        <option value="pisces">pisces</option>
+        <option value="taurus">taurus</option>
+        <option value="gemini">gemini</option>
+        <option value="cancer">cancer</option>
+        <option value="leo">leo</option>
+        <option value="virgo">virgo</option>
+        <option value="libra">libra</option>
+        <option value="scorpio">scorpio</option>
+        <option value="sagittarius">sagittarius</option>
+        <option value="capricorn">capricorn</option>
+    </select>
+
+    <input type="button" value="invia" onclick="funzione();">
+    <br>
+    <textarea type="text" name="Richieste" rows="12" cols="60" id="testo"> </textarea>
+    <br>
 
 </body>
+
 </html>
