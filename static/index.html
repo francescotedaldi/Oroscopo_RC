@@ -10,6 +10,12 @@
 
     <script>
         // CODICE JQUERY TODO
+        $(document).ready(function () {
+            $(#invia_btn).click(function(){
+            $(this).css("color", "blue");
+            });
+        })
+
     </script>
 </head>
 
@@ -38,7 +44,7 @@
     </select>
 
     <br>
-    <input type="submit" value="Invia">
+    <input type="submit" value="Invia" id="invia_btn">
 
     <br>
     <textarea type="text" name="Richieste" rows="20" cols="100" id="area_di_testo">
