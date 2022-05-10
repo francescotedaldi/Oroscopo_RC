@@ -3,10 +3,16 @@
 
 <head>
     <title>Oroscopo RC</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js">
+    </script>
+    <script text="text/javascript" src="request_to_pw.js">
+    </script>
+
+    <script>
+        // CODICE JQUERY TODO
+    </script>
 </head>
 
-<script text = "text/javascript" src = "request_to_pw.js">
-</script> 
 
 <body>
 
@@ -14,7 +20,8 @@
     <p>Questa è la pagina principale!</p>
 
     <br> Scegli un segno zodiacale:
-    <select name="regione" required id="scegli_segno">
+
+    <select name="segno_zodiacale" required id="scegli_segno">
         <option> ... </option>
         <option value="aries">aries</option>
         <option value="aquarius">aquarius</option>
@@ -32,9 +39,9 @@
 
     <br>
     <input type="submit" value="Invia">
-    
+
     <br>
-    <textarea type="text" name="Richieste" rows="20" cols="100" id="area_di_testo"> 
+    <textarea type="text" name="Richieste" rows="20" cols="100" id="area_di_testo">
     </textarea>
     <br>
 
