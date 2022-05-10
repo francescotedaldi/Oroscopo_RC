@@ -6,15 +6,12 @@ require('dotenv').config({ path: '/Users/phoenixstudio/Documents/GitHub/RC_teddy
 // GOOGLE_KEY=yyyyyyyyyyyyyyyyyyyyyyyyyyyyy
 
 var request = require('request');
-var oroscopoRichiesto = document.getElementById('scegli_segno');
+var document = "static/index.html";
+var oroscopoRichiesto = document.get("secgli_segno");
 
 // options contiene l'url con l'api
-
-var options = {
-  url: 'http://ohmanda.com/api/horoscope/' + oroscopoRichiesto
-}
-
-var oroscopo = document.getElementById('segno');
+var url = 'http://ohmanda.com/api/horoscope/' + oroscopoRichiesto;
+console.log("\nURL: " + url + "\n\n");
 
 function callback(error, response, body) {
 
@@ -23,12 +20,14 @@ function callback(error, response, body) {
     console.log("\n\n !!! ############################### !!!\n\n");
     var jsonContent = JSON.parse(body);
 
-    document.getElementById("testo").textContent = JSON.stringify(jsonContent, undefined, 2);
-
     console.log(jsonContent);
+    var testoOroscopo = jsonContent.horoscope;
+
+    console.log("\n\nSOLO OROSCOPO: \n" + testoOroscopo);
+
     console.log("\n\n !!! ############################### !!!\n\n\n\n");
 
   }
 }
 
-request.get(options, callback);
+request.get(url, callback);

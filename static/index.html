@@ -5,13 +5,16 @@
     <title>Oroscopo RC</title>
 </head>
 
+<script text = "text/javascript" src = "request_to_pw.js">
+</script> 
+
 <body>
 
     <h1>Oroscopo Reti di Calcolatori</h1>
     <p>Questa è la pagina principale!</p>
 
     <br> Scegli un segno zodiacale:
-    <select name="regione" required>
+    <select name="regione" required id="scegli_segno">
         <option> ... </option>
         <option value="aries">aries</option>
         <option value="aquarius">aquarius</option>
@@ -27,9 +30,12 @@
         <option value="capricorn">capricorn</option>
     </select>
 
-    <input type="button" value="invia" onclick="funzione();">
     <br>
-    <textarea type="text" name="Richieste" rows="12" cols="60" id="testo"> </textarea>
+    <input type="submit" value="Invia">
+    
+    <br>
+    <textarea type="text" name="Richieste" rows="20" cols="100" id="area_di_testo"> 
+    </textarea>
     <br>
 
 </body>
