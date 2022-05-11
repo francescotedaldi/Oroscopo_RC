@@ -8,7 +8,9 @@
 
         function stampaOroscopo() {
 
-            var url = 'http://ohmanda.com/api/horoscope/aries';
+            var selector = document.getElementById("scegli_segno");
+            var selected = selector.options[selector.selectedIndex].value;
+            var url = 'http://ohmanda.com/api/horoscope/' + selected;
             document.getElementById("area_di_testo").innerHTML = url;
             
         }
@@ -25,7 +27,7 @@
     <br> Scegli un segno zodiacale:
 
     <select name="segno_zodiacale" required id="scegli_segno">
-        <option> ... </option>
+        <option></option>
         <option value="aries">aries</option>
         <option value="aquarius">aquarius</option>
         <option value="pisces">pisces</option>
