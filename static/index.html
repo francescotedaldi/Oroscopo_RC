@@ -9,10 +9,25 @@
         function stampaOroscopo() {
 
             var selector = document.getElementById("scegli_segno");
-            var selected = selector.options[selector.selectedIndex].value;
-            var url = 'http://ohmanda.com/api/horoscope/' + selected;
-            document.getElementById("area_di_testo").innerHTML = url;
-            
+            var scegnoScelto = selector.options[selector.selectedIndex].value;
+
+            var request = require('request');
+
+            var prendi_url = {
+                url: 'http://ohmanda.com/api/horoscope/' + scegnoScelto,
+            }
+
+            function callback(error, response, body) {
+
+                if (!error && response.statusCode == 200) {
+                    var jsonContent = JSON.parse(body);
+                    var testoOroscopo = JSON.stringify(jsonContent.horoscope);
+
+                    document.getElementById("area_di_testo").textContent = testoOroscopo;
+                }
+            }
+
+            request.get(prendi_url, callback);
         }
     </script>
 
