@@ -1,16 +1,15 @@
+//const util = require('util')
+
 // richiedi libreria dotenv: la usiamo per non caricare su github le nostre info sensibili come key personali
 //.config serve per specificare che metti le tue info sensibili in quel path
-require('dotenv').config({ path: '/Users/phoenixstudio/Documents/GitHub/RC_teddy_millo/DATI_SENSIBILI.env' })
+require('dotenv').config({ path: '/Users/phoenixstudio/Desktop/RC/4.REST/DATI_SENSIBILI.env' })
 
 // il file .env è così strutturato
 // GOOGLE_KEY=yyyyyyyyyyyyyyyyyyyyyyyyyyyyy
 
 var request = require('request');
-var document = "static/index.html";
-var oroscopoRichiesto = document.get("secgli_segno");
 
-// options contiene l'url con l'api
-var url = 'http://ohmanda.com/api/horoscope/' + oroscopoRichiesto;
+var url = 'http://ohmanda.com/api/horoscope/aries';
 console.log("\nURL: " + url + "\n\n");
 
 function callback(error, response, body) {
