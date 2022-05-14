@@ -14,11 +14,18 @@ const app = express()
 // Logging
 if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'))
-  }
+}
+
+// Handlebars       exphbs.engine() oppure exphbs()?
+app.engine('.hbs', exphbs.engine({defaultLayout: 'main', extname: '.hbs'}))
+app.set('view engine', '.hbs')
+
+// Linkiamo i file Routes
+app.use('/', require('./routes/index'))
 
 const PORT = process.env.PORT || 3000
 
 app.listen(
-  PORT,
-  console.log(`!!! Server is running in ${process.env.NODE_ENV} mode on port ${PORT} !!!`)
+    PORT,
+    console.log(`!!! Server is running in ${process.env.NODE_ENV} mode on port ${PORT} !!!`)
 )
