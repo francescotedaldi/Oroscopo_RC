@@ -6,6 +6,8 @@ const router = express.Router()
 // @route   GET /auth/google
 router.get('/google', passport.authenticate('google', { scope: ['profile'] }))
 
+
+
 // @desc    Google auth callback
 // @route   GET /auth/google/callback
 router.get(
@@ -16,4 +18,13 @@ router.get(
     }
   )
 
+
+
+// @desc    Logout user
+// @route   /auth/logout
+router.get('/logout', (req, res) => {
+    req.logout()
+    res.redirect('/')
+  })
+  
 module.exports = router
