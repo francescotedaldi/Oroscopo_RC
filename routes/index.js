@@ -40,16 +40,16 @@ router.get('/dashboard', ensureAuth, (req, res) => {
 function callback(error, response, body) {
     if (!error && response.statusCode == 200) {
         var jsonContent = JSON.parse(body);
-        var info_api = JSON.stringify(jsonContent);
+        console.log("\n\n!!! STAMPO API: !!!\n\n");
+        console.log(jsonContent);
 
-       console.log("\n\n!!! STAMPO API: !!!\n\n" + info_api + "\n\n");
+        var info_api = JSON.stringify(jsonContent);     //json to string
+        console.log("\n\n\n");
     }
 }
 
 request.get(urlApi, callback);
 
 ////////////////////////////////////////
-
-
 
 module.exports = router
