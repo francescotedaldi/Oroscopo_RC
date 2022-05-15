@@ -1,13 +1,13 @@
 const path = require('path')
 const express = require('express')
 const dotenv = require('dotenv')
-const mongoose = require('mongoose')
 const connectDB = require('./config/db')
 const morgan = require('morgan')
 const passport = require('passport')
-const session = require('express-session')      //per usare passport
 const exphbs = require('express-handlebars')
-const MongoStore = require('connect-mongo')
+const session = require('express-session')               //per usare passport
+const mongoose = require('mongoose')
+const MongoStore = require('connect-mongo')     //per salvare la sessione su mongoDB
 
 // Load config
 dotenv.config({ path: './config/dati_sensibili.env' })
@@ -34,6 +34,8 @@ app.use(
       secret: 'keyboard cat',
       resave: false,    // non salviamo la sessione se nulla è stato modificato
       saveUninitialized: false, // non creare una sessione almeno che qualcosa non viene archiviato
+      
+      // salva la sessione
       store: MongoStore.create({mongoUrl: process.env.MONGO_URI,}),
     })
   )
