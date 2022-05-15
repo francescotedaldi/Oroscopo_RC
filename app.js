@@ -1,5 +1,6 @@
 const path = require('path')
 const express = require('express')
+const request = require('request');
 const dotenv = require('dotenv')
 const connectDB = require('./config/db')
 const morgan = require('morgan')
@@ -8,6 +9,7 @@ const exphbs = require('express-handlebars')
 const session = require('express-session')               //per usare passport
 const mongoose = require('mongoose')
 const MongoStore = require('connect-mongo')     //per salvare la sessione su mongoDB
+
 
 // Load config
 dotenv.config({ path: './config/dati_sensibili.env' })
