@@ -52,6 +52,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 // Linkiamo i file Routes
 app.use('/', require('./routes/index'))
 app.use('/auth', require('./routes/auth'))
+app.use('/oroscopi', require('./routes/oroscopi'))
 
 const PORT = process.env.PORT || 3000
 
