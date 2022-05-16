@@ -5,10 +5,8 @@ const router = express.Router()
 // prendi le funzioni per il corretto redirecting
 const { ensureAuth, ensureGuest } = require('../middleware/auth')
 
-
-var scegnoScelto = 'aries'
+var scegnoScelto = 'aquarius'
 var urlApi = process.env.URL_API + scegnoScelto
-
 
 // @desc    Login/Landing page
 // @route   GET /
@@ -26,8 +24,6 @@ router.get('/dashboard', ensureAuth, (req, res) => {
     console.log("\nsi è loggato:\n")
     console.log(req.user)
 
-    console.log("\n\n!!! stampo urlApi: !!!")
-    console.log(urlApi)
     res.render('dashboard', {
         name: req.user.firstName,
     })
