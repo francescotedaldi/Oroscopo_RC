@@ -1,31 +1,44 @@
-<h3>Aggiungi segno zodiacale</h3>
+<h3>Aggiungi il tuo diario di oggi</h3>
 <div class="row">
-    <form action="/stories" method="POST" class="col s12">
+
+    <form action="/oroscopi" method="POST" class="col s12">
+
         <div class="row">
             <div class="input-field">
-                <input type="select" id="segno_zodiacale" name="seleziona_segno">
-                <option></option>
-                <option value="aquarius">aquarius</option>
-                <option value="pisces">pisces</option>
-                <option value="aries">aries</option>
-                <option value="taurus">taurus</option>
-                <option value="gemini">gemini</option>
-                <option value="cancer">cancer</option>
-                <option value="leo">leo</option>
-                <option value="virgo">virgo</option>
-                <option value="libra">libra</option>
-                <option value="scorpio">scorpio</option>
-                <option value="sagittarius">sagittarius</option>
-                <option value="capricorn">capricorn</option>
+                <input type="text" id="title" name="title">
+                <label for="title">Titolo</label>
             </div>
         </div>
-</div>
 
+        <div class="row">
+            <div class="input-field">
+                <select id="segno" name="segno">
+                    <option value="aries" selected>aries</option>
+                    <option value="pisces">pisces</option>
+                    <option value="taurus">taurus</option>
+                    <option value="gemini">gemini</option>
+                    <option value="cancer">cancer</option>
+                    <option value="leo">leo</option>
+                    <option value="virgo">virgo</option>
+                    <option value="libra">libra</option>
+                    <option value="scorpio">scorpio</option>
+                    <option value="sagittarius">sagittarius</option>
+                    <option value="capricorn">capricorn</option>
+                </select>
+                <label for="segno">Segno zodiacale</label>
+            </div>
+        </div>
 
-<div class="row">
-    <input type="submit" value="Save" class="btn">
-    <a href="/dashboard" class="btn orange">Cancel</a>
-</div>
+        <div class="row">
+            <div class="input-field">
+                <h5>Come ti senti oggi?</h5>
+                <textarea id="body" name="body"></textarea>
+            </div>
+        </div>
 
-</form>
+        <div class="row">
+            <input type="submit" value="Save" class="btn">
+            <a href="/dashboard" class="btn orange">Cancel</a>
+        </div>
+    </form>
 </div>
