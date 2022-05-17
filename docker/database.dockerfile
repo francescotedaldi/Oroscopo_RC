@@ -1,4 +1,4 @@
-FROM couchdb:latest
+FROM mongo:latest
 
 LABEL maintainer="milletti.1884164@studenti.uniroma1.it"
 

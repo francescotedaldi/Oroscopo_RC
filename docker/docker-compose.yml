@@ -26,7 +26,8 @@ services:
       dockerfile: Dockerfile
     working_dir: /usr/src/app
     volumes:
-      - ./storage
+      - ./src:/usr/src/app/src
+      - ./node_modules:/usr/src/app/node_modules
     ports:
       - "3000"
     environment:
@@ -40,7 +41,8 @@ services:
       dockerfile: Dockerfile
     working_dir: /usr/src/app
     volumes:
-      - ./storage
+      - ./src:/usr/src/app/src
+      - ./node_modules:/usr/src/app/node_modules
     ports:
       - "3000"
     environment:
@@ -54,7 +56,8 @@ services:
       dockerfile: Dockerfile
     working_dir: /usr/src/app
     volumes:
-      - ./storage
+      - ./src:/usr/src/app/src
+      - ./node_modules:/usr/src/app/node_modules
     ports:
       - "3000"
     environment:
@@ -62,13 +65,14 @@ services:
     networks:
       - app-network
 
-  couchdb1:
+  mongodb:
     build:
       context: .
       dockerfile: database.dockerfile
     working_dir: /usr/src/app
     volumes:
-      - ./storage
+      - ./src:/usr/src/app/src
+      - ./node_modules:/usr/src/app/node_modules
 
     ports:
       - "5984:5984"
