@@ -8,7 +8,7 @@ const passport = require('passport')
 const exphbs = require('express-handlebars')
 const session = require('express-session')               //per usare passport
 const mongoose = require('mongoose')
-const MongoStore = require('connect-mongo')     //per salvare la sessione su mongoDB
+const MongoStore = require('connect-mongo')              //per salvare la sessione su mongoDB
 
 
 // Load config
@@ -21,12 +21,17 @@ connectDB()
 
 const app = express()
 
+// Body parser per accettare i dati della form, così possiamo accettare i dati da req.body in routes/oroscopi.js
+app.use(express.urlencoded({ extended: false }))
+// accettiamo anche dati json
+app.use(express.json())
+
 // Logging
 if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'))
 }
 
-// Handlebars       exphbs.engine() oppure exphbs()?
+// Handlebars
 app.engine('.hbs', exphbs.engine({defaultLayout: 'main', extname: '.hbs'}))
 app.set('view engine', '.hbs')
 

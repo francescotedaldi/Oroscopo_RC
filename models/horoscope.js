@@ -12,6 +12,9 @@ const OroscopoSchema = new mongoose.Schema({
   },
   segno: {
     type: String,
+    required: true,
+    default: 'aries',
+    enum: ['aquarius', 'pisces', 'aries', 'taurus', 'gemini', 'cancer', 'leo', 'virgo', 'libra', 'scorpio', 'sagittarius', 'capricorn']
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
