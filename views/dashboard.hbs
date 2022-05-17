@@ -1,3 +1,39 @@
 <h6>Dashboard</h6>
 <h3>Benvenuto/a {{name}}</h3>
-<p>L'oroscopo di oggi:</p>
+<br>Scegli il tuo segno zodiacale:
+
+{{#if oroscopi}}
+<table class="striped">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Date</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each oroscopi}}
+        <tr>
+            <td><a href="/oroscopi/{{_id}}">{{title}}</a></td>
+            <td>{{formatDate createdAt 'MMMM Do YYYY, h:mm:ss a'}}</td>
+            <td>
+                <a href="/oroscopi/edit/{{_id}}" class="btn btn-float">
+                    <i class="fas fa-edit"></i>
+                </a>
+
+                <form action="/oroscopi/{{_id}}" method="POST" id="delete-form">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button type="submit" class="btn red">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </form>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+{{else}}
+<p>Non hai alcun oroscopo</p>
+{{/if}}
+
+<input type="submit" value="Salva su Google Keep">

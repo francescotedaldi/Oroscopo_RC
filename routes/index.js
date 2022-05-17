@@ -4,12 +4,13 @@ const router = express.Router()
 
 
 // prendi le funzioni per il corretto redirecting
-const { ensureAuth, ensureGuest } = require('../middleware/auth')
+const { ensureAuth, ensureGuest } = require('../middleware/auth');
+const horoscope = require('../models/horoscope');
 
+const Oroscopo = require('../models/horoscope')
 
-var scegnoScelto = 'aries'
+var scegnoScelto = 'aquarius'
 var urlApi = process.env.URL_API + scegnoScelto
-
 
 // @desc    Login/Landing page
 // @route   GET /
@@ -23,17 +24,23 @@ router.get('/', ensureGuest, (req, res) => {
 // @desc    Dashboard
 // @route   GET /dashboard
 // solo chi è loggato dovrebbe vederlo (ensureAuth)
-router.get('/dashboard', ensureAuth, (req, res) => {
-    console.log("\nsi è loggato:\n")
-    console.log(req.user)
+router.get('/dashboard', ensureAuth, async (req, res) => {
+    try {
 
-    console.log("\n\n!!! stampo urlApi: !!!")
-    console.log(urlApi)
-    res.render('dashboard', {
-        name: req.user.firstName,
-    })
+        console.log('\n\nsi è loggato:\n\n')
+        console.log(req.user)
+
+        // con lean() dovinetano oggetti js, non mongoosedocuments
+        const oroscopi = await Oroscopo.find({ user: req.user.id }).lean()
+        res.render('dashboard', {
+            name: req.user.firstName,
+            oroscopi,
+        })
+    } catch (err) {
+        console.error(err)
+        res.render('error/500')
+    }
 })
-
 
 
 ////////////    PRENDI E STAMPA LE API
