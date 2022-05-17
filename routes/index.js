@@ -21,6 +21,13 @@ router.get('/', ensureGuest, (req, res) => {
     })
 })
 
+// @desc    About Us
+// @route   GET /about_us
+// solo chi è loggato dovrebbe vederlo (ensureAuth)
+router.get('/aboutus', ensureAuth, async(req, res) => {
+    res.render('about_us')
+})
+
 // @desc    Dashboard
 // @route   GET /dashboard
 // solo chi è loggato dovrebbe vederlo (ensureAuth)
