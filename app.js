@@ -28,24 +28,34 @@ app.use(express.json())
 
 // Logging
 if (process.env.NODE_ENV === 'development') {
-    app.use(morgan('dev'))
+  app.use(morgan('dev'))
 }
 
+
+// Handlebars Helpers
+const {
+  formatDate,
+} = require('./helpers/hbs')
+
 // Handlebars
-app.engine('.hbs', exphbs.engine({defaultLayout: 'main', extname: '.hbs'}))
+app.engine('.hbs', exphbs.engine({
+  helpers: {
+    formatDate,
+  }, defaultLayout: 'main', extname: '.hbs'
+}))
 app.set('view engine', '.hbs')
 
 // Sessions, middleware per passport, per info cerca express session su internet
 app.use(
-    session({
-      secret: 'keyboard cat',
-      resave: false,    // non salviamo la sessione se nulla è stato modificato
-      saveUninitialized: false, // non creare una sessione almeno che qualcosa non viene archiviato
-      
-      // salva la sessione
-      store: MongoStore.create({mongoUrl: process.env.MONGO_URI,}),
-    })
-  )
+  session({
+    secret: 'keyboard cat',
+    resave: false,    // non salviamo la sessione se nulla è stato modificato
+    saveUninitialized: false, // non creare una sessione almeno che qualcosa non viene archiviato
+
+    // salva la sessione
+    store: MongoStore.create({ mongoUrl: process.env.MONGO_URI, }),
+  })
+)
 
 // Passport middleware
 app.use(passport.initialize())
@@ -62,6 +72,6 @@ app.use('/oroscopi', require('./routes/oroscopi'))
 const PORT = process.env.PORT || 3000
 
 app.listen(
-    PORT,
-    console.log(`!!! Server is running in ${process.env.NODE_ENV} mode on port ${PORT} !!!`)
+  PORT,
+  console.log(`!!! Server is running in ${process.env.NODE_ENV} mode on port ${PORT} !!!`)
 )

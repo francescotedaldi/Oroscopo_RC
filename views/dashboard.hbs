@@ -7,6 +7,7 @@
     <thead>
         <tr>
             <th>Title</th>
+            <th>Date</th>
             <th>Sign</th>
             <th>Edit</th>
             <th></th>
@@ -16,6 +17,7 @@
         {{#each oroscopi}}
         <tr>
             <td><a href="/oroscopi/{{_id}}">{{title}}</a></td>
+            <td>{{formatDate createdAt 'MMMM Do YYYY, h:mm:ss a'}}</td>
             <td><span class="dash-status">{{segno}}</span></td>
             <td>
                 <a href="/oroscopi/edit/{{_id}}" class="btn btn-float">
