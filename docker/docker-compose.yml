@@ -1,0 +1,83 @@
+version: '2'
+
+services:
+
+  nginx:
+    build:
+      context: .
+      dockerfile: nginx.dockerfile
+    links:
+      - node1:node1
+      - node2:node2
+      - node3:node3
+      - mongodb:mongodb
+    depends_on:
+      - node1
+      - node2
+      - node3
+    ports:
+      - "8080:80"
+    networks:
+      - app-network
+
+  node1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /usr/src/app
+    volumes:
+      - ./storage
+    ports:
+      - "3000"
+    environment:
+      - INSTANCE=node1
+    networks:
+      - app-network
+
+  node2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /usr/src/app
+    volumes:
+      - ./storage
+    ports:
+      - "3000"
+    environment:
+      - INSTANCE=node2
+    networks:
+      - app-network
+
+  node3:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /usr/src/app
+    volumes:
+      - ./storage
+    ports:
+      - "3000"
+    environment:
+      - INSTANCE=node3
+    networks:
+      - app-network
+
+  couchdb1:
+    build:
+      context: .
+      dockerfile: database.dockerfile
+    working_dir: /usr/src/app
+    volumes:
+      - ./storage
+
+    ports:
+      - "5984:5984"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=username
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

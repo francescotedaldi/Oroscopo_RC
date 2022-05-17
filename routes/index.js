@@ -2,6 +2,7 @@ const express = require('express')
 var request = require('request');
 const router = express.Router()
 
+
 // prendi le funzioni per il corretto redirecting
 const { ensureAuth, ensureGuest } = require('../middleware/auth')
 
