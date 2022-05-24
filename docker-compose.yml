@@ -5,7 +5,7 @@ services:
   nginx:
     build:
       context: .
-      dockerfile: nginx.dockerfile
+      dockerfile: docker/nginx.dockerfile
     links:
       - node1:node1
       - node2:node2
@@ -68,7 +68,7 @@ services:
   mongodb:
     build:
       context: .
-      dockerfile: database.dockerfile
+      dockerfile: docker/database.dockerfile
     working_dir: /usr/src/app
     volumes:
       - ./src:/usr/src/app/src
