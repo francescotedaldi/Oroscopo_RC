@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const winston = require('winston');
+//const winston = require('winston');
 
 const app = express();
 
@@ -20,8 +20,8 @@ app.get('/', (req, res) => {
   res.render('index', { environment });
 });
 
-app.listen(process.env.PORT, () => {
+/*app.listen(process.env.PORT, () => {
   winston.info(`NODE_ENV: ${process.env.NODE_ENV}`);
   winston.info(`INSTANCE: ${process.env.INSTANCE}`);
   winston.info(`EXPRESS: ${process.env.PORT}`);
-});
+});*/

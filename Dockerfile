@@ -13,4 +13,4 @@ ENV PORT=3000
 
 EXPOSE 3000
 
-CMD nodemon -L docker/src/index.js
+CMD [ "nodemon", "-L", "src/index.js" ]
