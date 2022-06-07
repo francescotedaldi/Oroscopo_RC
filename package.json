@@ -4,6 +4,7 @@
   "description": "Oroscopo RdC",
   "main": "app.js",
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "cross-env NODE_ENV=production node app",
     "dev": "cross-env NODE_ENV=development nodemon app"
   },
@@ -18,6 +19,7 @@
   },
   "homepage": "https://github.com/francescotedaldi/Oroscopo_RC#readme",
   "dependencies": {
+    "chai": "^4.3.6",
     "connect-mongo": "^4.6.0",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
@@ -27,6 +29,7 @@
     "handlebars-helper": "^0.0.12",
     "handlebars-helper-formatdate": "^1.0.0",
     "method-override": "^3.0.0",
+    "mocha": "^10.0.0",
     "moment": "^2.29.3",
     "mongoose": "^6.3.3",
     "morgan": "^1.10.0",
@@ -36,7 +39,9 @@
     "winston": "^3.7.2"
   },
   "devDependencies": {
+    "chai": "^4.3.6",
     "cross-env": "^7.0.3",
+    "mocha": "^10.0.0",
     "nodemon": "^2.0.16"
   }
 }
