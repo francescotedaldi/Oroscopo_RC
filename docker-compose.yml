@@ -15,6 +15,7 @@ services:
       - node1
       - node2
       - node3
+      - mongodb
     ports:
       - "8080:80"
     networks:
@@ -81,6 +82,22 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=password
     networks:
       - app-network
+
+  rabbit:
+    build:
+      context: .
+      dockerfile: docker/rabbit.dockerfile
+    volumes:
+      - ./rabbitmq/data:/var/lib/rabbitmq
+      - ./rabbitmq/log:/var/log/rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=user
+      - RABBITMQ_DEFAULT_PASS=password
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+     - app-network
 
 networks:
   app-network:
