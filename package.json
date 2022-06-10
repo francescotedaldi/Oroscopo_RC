@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "Oroscopo RdC",
   "main": "app.js",
+  "files": [ "./" ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cross-env NODE_ENV=development nodemon app.js"
+    "start": "nodemon src/index.js"
   },
   "repository": {
     "type": "git",

@@ -11,11 +11,13 @@ services:
       - node2:node2
       - node3:node3
       - mongodb:mongodb
+      - rabbit:rabbit
     depends_on:
       - node1
       - node2
       - node3
       - mongodb
+      - rabbit
     ports:
       - "8080:80"
     networks:
@@ -27,8 +29,18 @@ services:
       dockerfile: Dockerfile
     working_dir: /usr/src/app
     volumes:
+      - ./package.json:/usr/src/app/package.json
+      - ./package-lock.json:/usr/src/app/package-lock.json
       - ./src:/usr/src/app/src
+      - ./app.js:/usr/src/app/app.js
+      - ./views:/usr/src/app/views
+      - ./routes:/usr/src/app/routes
+      - ./helpers:/usr/src/app/helpers
+      - ./models:/usr/src/app/models
+      - ./middleware:/usr/src/app/middleware
       - ./node_modules:/usr/src/app/node_modules
+      - ./config:/usr/src/app/config
+      - ./public:/usr/src/app/public
     ports:
       - "3000"
     environment:
@@ -42,8 +54,18 @@ services:
       dockerfile: Dockerfile
     working_dir: /usr/src/app
     volumes:
+      - ./package.json:/usr/src/app/package.json
+      - ./package-lock.json:/usr/src/app/package-lock.json
       - ./src:/usr/src/app/src
+      - ./app.js:/usr/src/app/app.js
+      - ./views:/usr/src/app/views
+      - ./routes:/usr/src/app/routes
+      - ./helpers:/usr/src/app/helpers
+      - ./models:/usr/src/app/models
+      - ./middleware:/usr/src/app/middleware
       - ./node_modules:/usr/src/app/node_modules
+      - ./config:/usr/src/app/config
+      - ./public:/usr/src/app/public
     ports:
       - "3000"
     environment:
@@ -57,8 +79,18 @@ services:
       dockerfile: Dockerfile
     working_dir: /usr/src/app
     volumes:
+      - ./package.json:/usr/src/app/package.json
+      - ./package-lock.json:/usr/src/app/package-lock.json
       - ./src:/usr/src/app/src
+      - ./app.js:/usr/src/app/app.js
+      - ./views:/usr/src/app/views
+      - ./routes:/usr/src/app/routes
+      - ./helpers:/usr/src/app/helpers
+      - ./models:/usr/src/app/models
+      - ./middleware:/usr/src/app/middleware
       - ./node_modules:/usr/src/app/node_modules
+      - ./config:/usr/src/app/config
+      - ./public:/usr/src/app/public
     ports:
       - "3000"
     environment:
@@ -72,9 +104,7 @@ services:
       dockerfile: docker/database.dockerfile
     working_dir: /usr/src/app
     volumes:
-      - ./src:/usr/src/app/src
-      - ./node_modules:/usr/src/app/node_modules
-
+      - ./mongodb:/data/db
     ports:
       - "5984:5984"
     environment:
