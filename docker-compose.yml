@@ -6,22 +6,14 @@ services:
     build:
       context: .
       dockerfile: docker/nginx.dockerfile
-    links:
-      - node1:node1
-      - node2:node2
-      - node3:node3
-      - mongodb:mongodb
-      - rabbit:rabbit
+    ports:
+      - "80:80"
+    networks:
+      - app-network
     depends_on:
       - node1
       - node2
       - node3
-      - mongodb
-      - rabbit
-    ports:
-      - "8080:80"
-    networks:
-      - app-network
 
   node1:
     build:
@@ -42,12 +34,12 @@ services:
       - ./config:/usr/src/app/config
       - ./public:/usr/src/app/public
     ports:
-      - "3000"
+      - "3000:3000"
     environment:
       - INSTANCE=node1
     networks:
       - app-network
-
+  
   node2:
     build:
       context: .
@@ -67,9 +59,9 @@ services:
       - ./config:/usr/src/app/config
       - ./public:/usr/src/app/public
     ports:
-      - "3000"
+      - "3001:3000"
     environment:
-      - INSTANCE=node2
+      - INSTANCE=node1
     networks:
       - app-network
 
@@ -92,9 +84,9 @@ services:
       - ./config:/usr/src/app/config
       - ./public:/usr/src/app/public
     ports:
-      - "3000"
+      - "3002:3000"
     environment:
-      - INSTANCE=node3
+      - INSTANCE=node1
     networks:
       - app-network
 
@@ -118,8 +110,10 @@ services:
       context: .
       dockerfile: docker/rabbit.dockerfile
     volumes:
-      - ./rabbitmq/data:/var/lib/rabbitmq
-      - ./rabbitmq/log:/var/log/rabbitmq
+      - ./rabbitmq:/var/lib/rabbitmq/mnesia
+    depends_on:
+      - node1
+      
     environment:
       - RABBITMQ_DEFAULT_USER=user
       - RABBITMQ_DEFAULT_PASS=password
