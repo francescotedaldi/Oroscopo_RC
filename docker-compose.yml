@@ -5,15 +5,13 @@ services:
   nginx:
     build:
       context: .
-      dockerfile: docker/nginx.dockerfile
+      dockerfile: ./docker/nginx.dockerfile
     ports:
       - "80:80"
     networks:
       - app-network
     depends_on:
       - node1
-      - node2
-      - node3
 
   node1:
     build:
@@ -23,7 +21,6 @@ services:
     volumes:
       - ./package.json:/usr/src/app/package.json
       - ./package-lock.json:/usr/src/app/package-lock.json
-      - ./src:/usr/src/app/src
       - ./app.js:/usr/src/app/app.js
       - ./views:/usr/src/app/views
       - ./routes:/usr/src/app/routes
@@ -40,60 +37,11 @@ services:
     networks:
       - app-network
   
-  node2:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    working_dir: /usr/src/app
-    volumes:
-      - ./package.json:/usr/src/app/package.json
-      - ./package-lock.json:/usr/src/app/package-lock.json
-      - ./src:/usr/src/app/src
-      - ./app.js:/usr/src/app/app.js
-      - ./views:/usr/src/app/views
-      - ./routes:/usr/src/app/routes
-      - ./helpers:/usr/src/app/helpers
-      - ./models:/usr/src/app/models
-      - ./middleware:/usr/src/app/middleware
-      - ./node_modules:/usr/src/app/node_modules
-      - ./config:/usr/src/app/config
-      - ./public:/usr/src/app/public
-    ports:
-      - "3001:3000"
-    environment:
-      - INSTANCE=node1
-    networks:
-      - app-network
-
-  node3:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    working_dir: /usr/src/app
-    volumes:
-      - ./package.json:/usr/src/app/package.json
-      - ./package-lock.json:/usr/src/app/package-lock.json
-      - ./src:/usr/src/app/src
-      - ./app.js:/usr/src/app/app.js
-      - ./views:/usr/src/app/views
-      - ./routes:/usr/src/app/routes
-      - ./helpers:/usr/src/app/helpers
-      - ./models:/usr/src/app/models
-      - ./middleware:/usr/src/app/middleware
-      - ./node_modules:/usr/src/app/node_modules
-      - ./config:/usr/src/app/config
-      - ./public:/usr/src/app/public
-    ports:
-      - "3002:3000"
-    environment:
-      - INSTANCE=node1
-    networks:
-      - app-network
 
   mongodb:
     build:
       context: .
-      dockerfile: docker/database.dockerfile
+      dockerfile: ./docker/database.dockerfile
     working_dir: /usr/src/app
     volumes:
       - ./mongodb:/data/db
@@ -108,7 +56,7 @@ services:
   rabbit:
     build:
       context: .
-      dockerfile: docker/rabbit.dockerfile
+      dockerfile: ./docker/rabbit.dockerfile
     volumes:
       - ./rabbitmq:/var/lib/rabbitmq/mnesia
     depends_on:
