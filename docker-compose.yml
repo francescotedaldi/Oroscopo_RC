@@ -8,6 +8,7 @@ services:
       dockerfile: ./docker/nginx.dockerfile
     ports:
       - "80:80"
+      - "443:443"
     networks:
       - app-network
     depends_on:
