@@ -10,9 +10,10 @@ services:
       - "80:80"
       - "443:443"
     networks:
-      - app-network
+      - oroscopo-nodes
     depends_on:
       - node1
+      - node2
 
   node1:
     build:
@@ -32,18 +33,45 @@ services:
       - ./config:/usr/src/app/config
       - ./public:/usr/src/app/public
     ports:
-      - "3000:3000"
+      - "3000"
     environment:
       - INSTANCE=node1
     networks:
-      - app-network
+      - oroscopo-nodes
+    depends_on:
+      - rabbit
+
+  node2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /usr/src/app
+    volumes:
+      - ./package.json:/usr/src/app/package.json
+      - ./package-lock.json:/usr/src/app/package-lock.json
+      - ./app.js:/usr/src/app/app.js
+      - ./views:/usr/src/app/views
+      - ./routes:/usr/src/app/routes
+      - ./helpers:/usr/src/app/helpers
+      - ./models:/usr/src/app/models
+      - ./middleware:/usr/src/app/middleware
+      - ./node_modules:/usr/src/app/node_modules
+      - ./config:/usr/src/app/config
+      - ./public:/usr/src/app/public
+    ports:
+      - "3000"
+    environment:
+      - INSTANCE=node1
+    networks:
+      - oroscopo-nodes
+    depends_on:
+      - rabbit
   
 
   mongodb:
     build:
       context: .
       dockerfile: ./docker/database.dockerfile
-    working_dir: /usr/src/app
     volumes:
       - ./mongodb:/data/db
     ports:
@@ -52,7 +80,7 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=username
       - MONGO_INITDB_ROOT_PASSWORD=password
     networks:
-      - app-network
+      - oroscopo-nodes
 
   rabbit:
     build:
@@ -60,8 +88,6 @@ services:
       dockerfile: ./docker/rabbit.dockerfile
     volumes:
       - ./rabbitmq:/var/lib/rabbitmq/mnesia
-    depends_on:
-      - node1
       
     environment:
       - RABBITMQ_DEFAULT_USER=user
@@ -70,8 +96,9 @@ services:
       - "5672:5672"
       - "15672:15672"
     networks:
-     - app-network
+     - oroscopo-nodes
 
 networks:
-  app-network:
+  oroscopo-nodes:
     driver: bridge
+  
