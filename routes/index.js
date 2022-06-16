@@ -24,7 +24,7 @@ router.get('/', ensureGuest, (req, res) => {
 // @desc    About Us
 // @route   GET /about_us
 // solo chi è loggato dovrebbe vederlo (ensureAuth)
-router.get('/aboutus', ensureAuth, async(req, res) => {
+router.get('/aboutus', ensureAuth, async (req, res) => {
     res.render('about_us')
 })
 
@@ -52,10 +52,10 @@ router.get('/dashboard', ensureAuth, async (req, res) => {
 
 ////////////    PRENDI E STAMPA LE API
 
-function callback(error, response, body) {
+function getApi(error, response, body) {
     if (!error && response.statusCode == 200) {
         var jsonContent = JSON.parse(body);
-        console.log("\n\n!!! STAMPO API: !!!\n\n");
+        console.log("\n\n!!! getApi: !!!\n\n");
         console.log(jsonContent);
 
         var info_api = JSON.stringify(jsonContent);     //json to string
@@ -63,7 +63,7 @@ function callback(error, response, body) {
     }
 }
 
-request.get(urlApi, callback);
+request.get(urlApi, getApi);
 
 ////////////////////////////////////////
 
