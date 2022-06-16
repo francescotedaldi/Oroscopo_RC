@@ -66,21 +66,6 @@ services:
       - oroscopo-nodes
     depends_on:
       - rabbit
-  
-
-  mongodb:
-    build:
-      context: .
-      dockerfile: ./docker/database.dockerfile
-    volumes:
-      - ./mongodb:/data/db
-    ports:
-      - "5984:5984"
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=username
-      - MONGO_INITDB_ROOT_PASSWORD=password
-    networks:
-      - oroscopo-nodes
 
   rabbit:
     build:
