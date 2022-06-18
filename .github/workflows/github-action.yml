@@ -29,7 +29,7 @@ jobs:
 
       #6
       - name: Run Test
-        run: npm test --prefix ./src
+        run: npm test
 
       #7
       - name: Stop
