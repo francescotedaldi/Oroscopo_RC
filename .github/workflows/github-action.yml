@@ -9,7 +9,7 @@ jobs:
       
       #1
       - name: Gcheck
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       #2
       - name: Start 
@@ -17,11 +17,18 @@ jobs:
 
       #3
       - name: Waiting the startup sequence 
-        uses: jakejarvis/wait-action@master
-        with:
-          time: '15s'
+        run: sleep 30s
 
       #4
+      - name: Install node & mocha
+        uses: actions/setup-node@v3
+        run: npm install -g mocha
+
+      #5
+      - name: Run Test
+        run: npm test --prefix ./src
+
+      #6
       - name: Stop
         if: always() 
         run: docker-compose down
