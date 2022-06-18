@@ -28,10 +28,14 @@ jobs:
         run: npm install -g mocha
 
       #6
+      - name: install axios
+        run: npm install -g axios
+
+      #7
       - name: Run Test
         run: npm test
 
-      #7
+      #8
       - name: Stop
         if: always() 
         run: docker-compose down
