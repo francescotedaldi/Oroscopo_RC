@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Oroscopo RdC",
   "main": "app.js",
-  "files": [ "./" ],
+  "files": [
+    "./"
+  ],
   "scripts": {
     "test": "mocha",
     "start": "nodemon app.js"
@@ -19,6 +21,7 @@
   },
   "homepage": "https://github.com/francescotedaldi/Oroscopo_RC#readme",
   "dependencies": {
+    "axios": "^0.27.2",
     "chai": "^4.3.6",
     "connect-mongo": "^4.6.0",
     "dotenv": "^16.0.1",
