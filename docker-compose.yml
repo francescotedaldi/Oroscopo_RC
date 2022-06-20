@@ -71,8 +71,6 @@ services:
     build:
       context: .
       dockerfile: ./docker/rabbitmq.dockerfile
-    volumes:
-      - ./rabbitmq:/var/lib/rabbitmq
     environment:
       - RABBITMQ_DEFAULT_USER=user
       - RABBITMQ_DEFAULT_PASS=password
