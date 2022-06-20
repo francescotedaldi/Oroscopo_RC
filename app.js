@@ -10,6 +10,8 @@ const session = require('express-session')               //per usare passport
 const mongoose = require('mongoose')
 const MongoStore = require('connect-mongo')              //per salvare la sessione su mongoDB
 
+const sendToRabbit = require('./config/send')            //Invio 'Hello world' a Rabbit
+const recvFromRabbit = require('./config/receive')       //Ricezione 'Hello world' da Rabbit
 
 // Load config
 dotenv.config({ path: './config/dati_sensibili.env' })
@@ -18,6 +20,9 @@ dotenv.config({ path: './config/dati_sensibili.env' })
 require('./config/passport')(passport)
 
 connectDB()
+
+sendToRabbit()
+recvFromRabbit()
 
 const app = express()
 
