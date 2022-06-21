@@ -49,7 +49,6 @@ router.get('/dashboard', ensureAuth, async (req, res) => {
     }
 })
 
-
 ////////////    PRENDI E STAMPA LE API
 
 function getApi(error, response, body) {
