@@ -7,14 +7,9 @@ const pp = require('../config/passport')
 
 // @desc    Auth with Google
 // @route   GET /auth/google
-/*
-  ---> 'https://www.googleapis.com/auth/drive.file' <---
-Visualizzare, modificare, creare ed eliminare soltanto i file di Google Drive specifici che usi con questa app
 
----> 'profile' <---
-Accede solo all' account, non da mai problemi
-*/
-router.get('/google', passport.authenticate('google', { scope: ['profile'] }))
+// ---> 'https://www.googleapis.com/auth/drive.file'  || 'profile' <---
+router.get('/google', passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/userinfo.profile', 'https://www.googleapis.com/auth/drive.file'] }))
 
 
 // @desc    Google auth callback
