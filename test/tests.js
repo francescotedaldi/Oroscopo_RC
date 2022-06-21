@@ -29,3 +29,17 @@ describe("Test nginx is proxing in https", function() {
   });
 });
 
+describe("Test if the dashboard is reachable", function() {
+    it("should return 200", function(done) {
+        axios.get('https://localhost:443/dashboard', {httpsAgent: agent}).then(function(response) {
+	       response.status.should.equal(200);
+		   done();
+	}).catch(function(error) {
+		   done(error);
+	});
+  });
+});
+
+
+
+
