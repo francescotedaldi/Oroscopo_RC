@@ -9,9 +9,6 @@ const horoscope = require('../models/horoscope');
 
 const Oroscopo = require('../models/horoscope')
 
-var scegnoScelto = 'aquarius'
-var urlApi = process.env.URL_API + scegnoScelto
-
 // @desc    Login/Landing page
 // @route   GET /
 // solo chi non è loggato dovrebbe vederlo (ensureGuest)
@@ -48,22 +45,5 @@ router.get('/dashboard', ensureAuth, async (req, res) => {
         res.render('error/500')
     }
 })
-
-////////////    PRENDI E STAMPA LE API
-
-function getApi(error, response, body) {
-    if (!error && response.statusCode == 200) {
-        var jsonContent = JSON.parse(body);
-        console.log("\n\n!!! getApi: !!!\n\n");
-        console.log(jsonContent);
-
-        var info_api = JSON.stringify(jsonContent);     //json to string
-        console.log("\n\n\n");
-    }
-}
-
-request.get(urlApi, getApi);
-
-////////////////////////////////////////
 
 module.exports = router
