@@ -6,8 +6,8 @@ const router = express.Router()
 // prendi le funzioni per il corretto redirecting
 const { ensureAuth, ensureGuest } = require('../middleware/auth');
 const horoscope = require('../models/horoscope');
+const Oroscopo = require('../models/horoscope');
 
-const Oroscopo = require('../models/horoscope')
 
 // @desc    Login/Landing page
 // @route   GET /
@@ -46,4 +46,23 @@ router.get('/dashboard', ensureAuth, async (req, res) => {
     }
 })
 
+//Stampa API
+var segnoScelto = 'aries';
+var urlApi = process.env.URL_API + segnoScelto;
+
+function ApiManager() {
+    function getApi(error, response, body) {
+        if (!error && response.statusCode == 200) {
+            var jsonContent = JSON.parse(body);
+            console.log("\n\n!!! getApi: !!!\n\n");
+            //console.log(jsonContent);
+            var info_api = JSON.stringify(jsonContent);     //json to string
+            //console.log("\n\n\n");
+            console.log(info_api);
+        }
+    }
+    request.get(urlApi, getApi);
+}
+
+ApiManager();
 module.exports = router
