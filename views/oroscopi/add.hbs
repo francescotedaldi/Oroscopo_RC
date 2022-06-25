@@ -1,8 +1,42 @@
+<script type="text/javascript">
+
+    document.getElementById("formSegno").addEventListener("submit", getApi);
+
+
+    var scegnoScelto = 'aquarius';
+    var urlApi = 'http://ohmanda.com/api/horoscope/' + scegnoScelto;
+    var request = require('request');
+
+
+    function myFunction() {
+        alert("The form was submitted");
+    }
+
+    function getApi() {
+
+        function callback(error, response, body) {
+            if (!error && response.statusCode == 200) {
+                var jsonContent = JSON.parse(body);
+                console.log("\n\n\n\n\n\n!!! GETAPI: !!!\n\n\n\n");
+                console.log(jsonContent);
+                var info_api = JSON.stringify(jsonContent);     //json to string
+                console.log("\n\n\n\n\n\n");
+            }
+        }
+
+        alert("GETAPI");
+
+        request.get(urlApi, callback);
+
+    }
+
+</script>
+
 <h3>Aggiungi il tuo diario di oggi</h3>
 
 <div class="row">
 
-    <form action="/oroscopi" method="POST" class="col s12">
+    <form id="formSegno" action="/oroscopi" method="POST" class="col s12">
 
         <div class="row">
             <div class="input-field">
@@ -28,7 +62,6 @@
                 </select>
                 <label for="segno">Segno zodiacale</label>
             </div>
-            
         </div>
 
         <div class="row">

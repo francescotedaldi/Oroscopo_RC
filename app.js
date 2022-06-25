@@ -10,9 +10,9 @@ const session = require('express-session')               //per usare passport
 const mongoose = require('mongoose')
 const MongoStore = require('connect-mongo')              //per salvare la sessione su mongoDB
 
-
 // Load config
 dotenv.config({ path: './config/dati_sensibili.env' })
+
 
 // Passport config
 require('./config/passport')(passport)
@@ -67,6 +67,32 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use('/', require('./routes/index'))
 app.use('/auth', require('./routes/auth'))
 app.use('/oroscopi', require('./routes/oroscopi'))
+
+
+
+/////////////   API ///////////////////////////////////
+
+function getApi() {
+
+  var scegnoScelto = 'aquarius';
+  var urlApi = process.env.URL_API + scegnoScelto;
+
+  function callback(error, response, body) {
+      if (!error && response.statusCode == 200) {
+          var jsonContent = JSON.parse(body);
+          console.log("\n\n\n\n!!! GETAPI: !!!\n\n\n\n");
+          console.log(jsonContent);
+          var info_api = JSON.stringify(jsonContent);     //json to string
+          console.log("\n\n\n");
+      }
+  }
+
+  request.get(urlApi, callback);
+}
+
+getApi();   //stampa Api all' avvio del programma
+
+/////////////  fine API ///////////////////////////////////
 
 const PORT = process.env.PORT || 3000
 
