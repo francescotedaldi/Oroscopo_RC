@@ -1,37 +1,3 @@
-<script type="text/javascript">
-
-    document.getElementById("formSegno").addEventListener("submit", getApi);
-
-
-    var scegnoScelto = 'aquarius';
-    var urlApi = 'http://ohmanda.com/api/horoscope/' + scegnoScelto;
-    var request = require('request');
-
-
-    function myFunction() {
-        alert("The form was submitted");
-    }
-
-    function getApi() {
-
-        function callback(error, response, body) {
-            if (!error && response.statusCode == 200) {
-                var jsonContent = JSON.parse(body);
-                console.log("\n\n\n\n\n\n!!! GETAPI: !!!\n\n\n\n");
-                console.log(jsonContent);
-                var info_api = JSON.stringify(jsonContent);     //json to string
-                console.log("\n\n\n\n\n\n");
-            }
-        }
-
-        alert("GETAPI");
-
-        request.get(urlApi, callback);
-
-    }
-
-</script>
-
 <h3>Aggiungi il tuo diario di oggi</h3>
 
 <div class="row">
@@ -48,7 +14,8 @@
         <div class="row">
             <div class="input-field">
                 <select id="segno" name="segno">
-                    <option value="aries" selected>aries</option>
+                    <option value="aquarius">aquarius</option>
+                    <option value="aries">aries</option>
                     <option value="pisces">pisces</option>
                     <option value="taurus">taurus</option>
                     <option value="gemini">gemini</option>
@@ -60,7 +27,7 @@
                     <option value="sagittarius">sagittarius</option>
                     <option value="capricorn">capricorn</option>
                 </select>
-                <label for="segno">Segno zodiacale</label>
+                <!-- <label for="segno">Segno zodiacale</label> -->
             </div>
         </div>
 
@@ -72,8 +39,38 @@
         </div>
 
         <div class="row">
-            <input type="submit" value="Save" class="btn">
+            <input type="submit" value="Save" class="btn" onclick="getApi()">
             <a href="/dashboard" class="btn orange">Cancel</a>
         </div>
     </form>
 </div>
+
+
+<script type="text/javascript">
+
+    //document.getElementById("formSegno").addEventListener("submit", getApi);
+
+    var x = document.getElementById("segno").selectedIndex;
+    var y = document.getElementById("segno").options;
+
+    var urlApi = 'http://ohmanda.com/api/horoscope/'; //+ scegnoScelto;
+    var request = require('request');
+
+    function getApi() {
+
+        function callback(error, response, body) {
+            if (!error && response.statusCode == 200) {
+                var jsonContent = JSON.parse(body);
+                console.log("\n\n\n\n\n\n!!! GETAPI: !!!\n\n\n\n");
+                console.log(jsonContent);
+                var info_api = JSON.stringify(jsonContent);     //json to string
+                console.log("\n\n\n\n\n\n");
+            }
+        }
+
+        alert("GETAPI Index: " + y[x].index + " is " + y[x].text);
+        request.get(urlApi, callback);
+
+    }
+
+</script>

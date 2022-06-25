@@ -10,6 +10,7 @@ const session = require('express-session')               //per usare passport
 const mongoose = require('mongoose')
 const MongoStore = require('connect-mongo')              //per salvare la sessione su mongoDB
 
+
 // Load config
 dotenv.config({ path: './config/dati_sensibili.env' })
 
@@ -70,29 +71,51 @@ app.use('/oroscopi', require('./routes/oroscopi'))
 
 
 
-/////////////   API ///////////////////////////////////
+/////////////   API /////////////////////////////////////////////////////
 
 function getApi() {
 
-  var scegnoScelto = 'aquarius';
-  var urlApi = process.env.URL_API + scegnoScelto;
-
   function callback(error, response, body) {
-      if (!error && response.statusCode == 200) {
-          var jsonContent = JSON.parse(body);
-          console.log("\n\n\n\n!!! GETAPI: !!!\n\n\n\n");
-          console.log(jsonContent);
-          var info_api = JSON.stringify(jsonContent);     //json to string
-          console.log("\n\n\n");
-      }
+    if (!error && response.statusCode == 200) {
+      var jsonContent = JSON.parse(body);
+      console.log("\n!!! GETAPI: !!!\n");
+      console.log(jsonContent);
+      var info_api = JSON.stringify(jsonContent);     //json to string
+      console.log("\n\n\n");
+    }
   }
 
   request.get(urlApi, callback);
 }
 
-getApi();   //stampa Api all' avvio del programma
+/*
+var urlApi = process.env.URL_API + 'aquarius';
+getApi();
+var urlApi = process.env.URL_API + 'aries';
+getApi(); 
+urlApi = process.env.URL_API + 'pisces';
+getApi(); 
+urlApi = process.env.URL_API + 'taurus';
+getApi(); 
+urlApi = process.env.URL_API + 'gemini';
+getApi(); 
+urlApi = process.env.URL_API + 'cancer';
+getApi(); 
+urlApi = process.env.URL_API + 'leo';
+getApi(); 
+urlApi = process.env.URL_API + 'virgo';
+getApi(); 
+urlApi = process.env.URL_API + 'libra';
+getApi(); 
+urlApi = process.env.URL_API + 'scorpio';
+getApi(); 
+urlApi = process.env.URL_API + 'sagittarius';
+getApi(); 
+urlApi = process.env.URL_API + 'capricorn';
+getApi(); 
+*/
 
-/////////////  fine API ///////////////////////////////////
+/////////////  fine API ///////////////////////////////////////////////////
 
 const PORT = process.env.PORT || 3000
 
