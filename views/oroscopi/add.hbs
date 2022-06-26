@@ -13,7 +13,7 @@
 
         <div class="row">
             <div class="input-field">
-                <select id="segno" name="segno">
+                <select id="segno">
                     <option value="aquarius">aquarius</option>
                     <option value="aries">aries</option>
                     <option value="pisces">pisces</option>
@@ -48,10 +48,9 @@
 
 <script type="text/javascript">
 
-    //document.getElementById("formSegno").addEventListener("submit", getApi);
-
     var x = document.getElementById("segno").selectedIndex;
     var y = document.getElementById("segno").options;
+    var scegnoScelto = y[x].text;
 
     var urlApi = 'http://ohmanda.com/api/horoscope/' + scegnoScelto;
     var request = require('request');
@@ -68,7 +67,7 @@
             }
         }
 
-        alert("GETAPI Index: " + y[x].index + " is " + y[x].text);
+        alert("GETAPI:\n" + urlApi + "\nIndex: " + y[x].index + " is " + scegnoScelto);
         request.get(urlApi, callback);
 
     }

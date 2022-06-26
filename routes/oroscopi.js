@@ -75,6 +75,32 @@ router.get('/save/:id', ensureAuth, async (req, res) => {
   }
 })
 
+// @desc    Update oroscopo
+// @route   PUT /oroscopi/:id
+router.put('/:id', ensureAuth, async (req, res) => {
+  try {
+    let oroscopo = await Oroscopo.findById(req.params.id).lean()
+
+    if (!oroscopo) {
+      return res.render('error/404')
+    }
+
+    if (oroscopo.user != req.user.id) {
+      res.redirect('/oroscopi')
+    } else {
+      oroscopo = await Oroscopo.findOneAndUpdate({ _id: req.params.id }, req.body, {
+        new: true,
+        runValidators: true,
+      })
+
+      res.redirect('/dashboard')
+    }
+  } catch (err) {
+    console.error(err)
+    return res.render('error/500')
+  }
+})
+
 // @desc    Delete oroscopo
 // @route   DELETE /oroscopi/:id
 router.delete('/:id', ensureAuth, async (req, res) => {

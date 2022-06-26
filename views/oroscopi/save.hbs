@@ -1,27 +1,25 @@
-<!-- TUTTO DA MODIFICARE-->
-
-<h3>Edit Oroscopo</h3>
-<h3>file frontend da modificare: views/oroscopi/save.hbs</h3>
+<h3>Salva Diario</h3>
+<h5>file frontend da modificare: views/oroscopi/save.hbs</h5>
 <div class="row">
     <form action="/oroscopi/{{oroscopo._id}}" method="POST" class="col s12">
         <input type="hidden" name="_method" value="PUT">
         <div class="row">
-            <div class="input-field">
-                <input type="text" id="title" name="title" value="{{oroscopo.title}}">
-                <label for="title">Title</label>
-            </div>
+            <h6>Avendo effettuato l'accesso con Google, premendo su salva verrà creato un evento su Calendar nella
+                seguente data:</h6>
+            <h6>{{formatDate createdAt 'MMMM Do YYYY'}}</h6>
+            <h6>Verrà salvato anche il tuo oroscopo nella descrizione dell'evento. Vuoi salvare?</h6>
         </div>
 
         <div class="row">
-            <div class="input-field">
-                <h5>Tell Us Your Oroscopo:</h5>
-                <textarea id="body" name="body">{{oroscopo.body}}</textarea>
-            </div>
-        </div>
-
-        <div class="row">
-            <input type="submit" value="Save" class="btn">
+            <input type="submit" value="Save" class="btn" onclick='salvaOroscopo()'>
             <a href="/dashboard" class="btn orange">Cancel</a>
         </div>
     </form>
 </div>
+
+<script type="text/javascript">
+
+    function salvaOroscopo() {
+        alert('Salvo su calendar...');
+    }
+</script>
