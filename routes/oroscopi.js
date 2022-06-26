@@ -26,6 +26,24 @@ router.post('/', ensureAuth, async (req, res) => {
   }
 })
 
+// @desc    Show all oroscopi
+// @route   GET /oroscopi
+router.get('/', ensureAuth, async (req, res) => {
+  try {
+    const oroscopi = await Oroscopo.find({})
+      .populate('user')
+      .sort({ createdAt: 'desc' })
+      .lean()
+
+    res.render('oroscopi/index', {
+      oroscopi,
+    })
+  } catch (err) {
+    console.error(err)
+    res.render('error/500')
+  }
+})
+
 // @desc    Show single oroscopo
 // @route   GET /oroscopi/:id
 router.get('/:id', ensureAuth, async (req, res) => {
