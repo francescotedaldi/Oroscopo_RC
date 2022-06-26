@@ -1,3 +1,4 @@
+/*
 const app = require('./app');
 
 function getApi() {
@@ -18,3 +19,4 @@ function getApi() {
 
     request.get(urlApi, callback);
 }
+*/

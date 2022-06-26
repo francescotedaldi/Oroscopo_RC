@@ -1,0 +1,27 @@
+<!-- TUTTO DA MODIFICARE-->
+
+<h3>Edit Oroscopo</h3>
+<h3>file frontend da modificare: views/oroscopi/save.hbs</h3>
+<div class="row">
+    <form action="/oroscopi/{{oroscopo._id}}" method="POST" class="col s12">
+        <input type="hidden" name="_method" value="PUT">
+        <div class="row">
+            <div class="input-field">
+                <input type="text" id="title" name="title" value="{{oroscopo.title}}">
+                <label for="title">Title</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field">
+                <h5>Tell Us Your Oroscopo:</h5>
+                <textarea id="body" name="body">{{oroscopo.body}}</textarea>
+            </div>
+        </div>
+
+        <div class="row">
+            <input type="submit" value="Save" class="btn">
+            <a href="/dashboard" class="btn orange">Cancel</a>
+        </div>
+    </form>
+</div>

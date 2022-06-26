@@ -20,8 +20,8 @@
             <td>{{formatDate createdAt 'MMMM Do YYYY, h:mm:ss a'}}</td>
             <td><span class="dash-status">{{segno}}</span></td>
             <td>
-                <a href="/oroscopi/edit/{{_id}}" class="btn btn-float">
-                    <i class="fas fa-edit"></i>
+                <a href="/oroscopi/save/{{_id}}" class="btn btn-float">
+                    <i class="fas fa-save"></i>
                 </a>
 
                 <form action="/oroscopi/{{_id}}" method="POST" id="delete-form">

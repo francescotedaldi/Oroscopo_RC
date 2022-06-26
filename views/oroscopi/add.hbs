@@ -27,7 +27,7 @@
                     <option value="sagittarius">sagittarius</option>
                     <option value="capricorn">capricorn</option>
                 </select>
-                <!-- <label for="segno">Segno zodiacale</label> -->
+                <label for="segno">Segno zodiacale</label>
             </div>
         </div>
 
@@ -53,7 +53,7 @@
     var x = document.getElementById("segno").selectedIndex;
     var y = document.getElementById("segno").options;
 
-    var urlApi = 'http://ohmanda.com/api/horoscope/'; //+ scegnoScelto;
+    var urlApi = 'http://ohmanda.com/api/horoscope/' + scegnoScelto;
     var request = require('request');
 
     function getApi() {
