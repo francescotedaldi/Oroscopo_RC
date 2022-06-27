@@ -11,6 +11,9 @@ const session = require('express-session')               //per usare passport
 const mongoose = require('mongoose')
 const MongoStore = require('connect-mongo')              //per salvare la sessione su mongoDB
 
+var segnoZodiacale = ['aquarius', 'pisces', 'aries', 'taurus', 'gemini', 'cancer', 'leo', 'virgo', 'libra', 'scorpio', 'sagittarius', 'capricorn'];
+var Oroscopi = [];
+var urlApi = '';
 
 // Load config
 dotenv.config({ path: './config/dati_sensibili.env' })
@@ -87,23 +90,29 @@ app.use('/auth', require('./routes/auth'))
 app.use('/oroscopi', require('./routes/oroscopi'))
 
 
-
 /////////////   API /////////////////////////////////////////////////////
 
-function getApi() {
+function getAllApis() {
+
+  var i = 0;
 
   function callback(error, response, body) {
     if (!error && response.statusCode == 200) {
       var jsonContent = JSON.parse(body);
-      console.log("\n!!! GETAPI: !!!\n");
-      console.log(jsonContent);
       var info_api = JSON.stringify(jsonContent);     //json to string
-      console.log("\n\n\n");
+      Oroscopi[i] = jsonContent;
     }
   }
 
-  request.get(urlApi, callback);
+  for (i; i < segnoZodiacale.length; i++) {
+    urlApi = '';
+    urlApi = process.env.URL_API + segnoZodiacale[i];
+    console.log('\nVado a prendere !!! urlApi !!! : ' + urlApi);
+    request.get(urlApi, callback);
+  }
 }
+
+getAllApis();
 
 /*
 var urlApi = process.env.URL_API + 'aquarius';

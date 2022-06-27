@@ -14,7 +14,7 @@
         <div class="row">
             <div class="input-field">
                 <select id="segno" name="segno">
-                    <option value="aquarius" selected>aquarius</option>
+                    <option value="aquarius">aquarius</option>
                     <option value="aries">aries</option>
                     <option value="pisces">pisces</option>
                     <option value="taurus">taurus</option>
@@ -39,45 +39,17 @@
         </div>
 
         <div class="row">
-            <input type="submit" value="Save" class="btn" onclick="getApi()">
+            <input type="submit" value="Save" class="btn" onclick="PrintSegno()">
             <a href="/dashboard" class="btn orange">Cancel</a>
-            <!--<input type="button" value="Api" class="btn" onclick="print()">-->
         </div>
     </form>
 </div>
 
-<!--<script>
-    function print() {
-        var segno = document.getElementsByName("segno");
-        console.log(segno);
-        alert(segno);
+<script>
+    function PrintSegno() {
+        var myNodelist = document.getElementById("segno");
+        document.getElementsByName("segno").innerHtml = myNodelist;
+        console.log(myNodelist.value);
+        alert(myNodelist.value);
     }
-</script> -->
-
-<script type="text/javascript">
-
-    var x = document.getElementById("segno").selectedIndex;
-    var y = document.getElementById("segno").options;
-    var scegnoScelto = y[x].text;
-
-    var urlApi = 'http://ohmanda.com/api/horoscope/' + scegnoScelto;
-    var request = require('request');
-
-    function getApi() {
-
-        function callback(error, response, body) {
-            if (!error && response.statusCode == 200) {
-                var jsonContent = JSON.parse(body);
-                console.log("\n\n\n\n\n\n!!! GETAPI: !!!\n\n\n\n");
-                console.log(jsonContent);
-                var info_api = JSON.stringify(jsonContent);     //json to string
-                console.log("\n\n\n\n\n\n");
-            }
-        }
-
-        alert("GETAPI:\n" + urlApi + "\nIndex: " + y[x].index + " is " + scegnoScelto);
-        request.get(urlApi, callback);
-
-    }
-
 </script>
