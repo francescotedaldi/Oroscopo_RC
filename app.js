@@ -12,9 +12,7 @@ const mongoose = require('mongoose')
 const MongoStore = require('connect-mongo')              //per salvare la sessione su mongoDB
 
 
-var segnoZodiacale = ['aquarius', 'pisces', 'aries', 'taurus', 'gemini', 'cancer', 'leo', 'virgo', 'libra', 'scorpio', 'sagittarius', 'capricorn'];
-var Oroscopi = [];
-var urlApi = '';
+var apiUtils = require('./public/apiUtils.js');
 
 // Load config
 dotenv.config({ path: './config/dati_sensibili.env' })
@@ -92,79 +90,7 @@ app.use('/oroscopi', require('./routes/oroscopi'))
 
 app.use('/', express.static('./public'))
 
-/*
-app.route({
-  method: 'GET',
-  path: './printaSegno',
-  handler: {
-    directory: {
-      path:    __dirname + '/',
-      listing: false,
-      index:   false
-    }
-  }
-});
-
-app.route({
-  method: 'GET',
-  path: '/',
-  handler: function(request, reply) {
-    reply.view('./views/layouts');
-  }
-});
-*/
-/////////////   API /////////////////////////////////////////////////////
-
-function getAllApis() {
-
-  var i = 0;
-
-  function callback(error, response, body) {
-    if (!error && response.statusCode == 200) {
-      var jsonContent = JSON.parse(body);
-      var info_api = JSON.stringify(jsonContent);     //json to string
-      Oroscopi[i] = jsonContent;
-    }
-  }
-
-  for (i; i < segnoZodiacale.length; i++) {
-    urlApi = '';
-    urlApi = process.env.URL_API + segnoZodiacale[i];
-    console.log('\nVado a prendere !!! urlApi !!! : ' + urlApi);
-    request.get(urlApi, callback);
-  }
-}
-
-getAllApis();
-
-/*
-var urlApi = process.env.URL_API + 'aquarius';
-getApi();
-var urlApi = process.env.URL_API + 'aries';
-getApi(); 
-urlApi = process.env.URL_API + 'pisces';
-getApi(); 
-urlApi = process.env.URL_API + 'taurus';
-getApi(); 
-urlApi = process.env.URL_API + 'gemini';
-getApi(); 
-urlApi = process.env.URL_API + 'cancer';
-getApi(); 
-urlApi = process.env.URL_API + 'leo';
-getApi(); 
-urlApi = process.env.URL_API + 'virgo';
-getApi(); 
-urlApi = process.env.URL_API + 'libra';
-getApi(); 
-urlApi = process.env.URL_API + 'scorpio';
-getApi(); 
-urlApi = process.env.URL_API + 'sagittarius';
-getApi(); 
-urlApi = process.env.URL_API + 'capricorn';
-getApi(); 
-*/
-
-/////////////  fine API ///////////////////////////////////////////////////
+/////////
 
 const PORT = process.env.PORT || 3000
 
