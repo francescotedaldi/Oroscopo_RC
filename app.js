@@ -11,6 +11,7 @@ const session = require('express-session')               //per usare passport
 const mongoose = require('mongoose')
 const MongoStore = require('connect-mongo')              //per salvare la sessione su mongoDB
 
+
 var segnoZodiacale = ['aquarius', 'pisces', 'aries', 'taurus', 'gemini', 'cancer', 'leo', 'virgo', 'libra', 'scorpio', 'sagittarius', 'capricorn'];
 var Oroscopi = [];
 var urlApi = '';
@@ -89,7 +90,29 @@ app.use('/', require('./routes/index'))
 app.use('/auth', require('./routes/auth'))
 app.use('/oroscopi', require('./routes/oroscopi'))
 
+app.use('/', express.static('./public'))
 
+/*
+app.route({
+  method: 'GET',
+  path: './printaSegno',
+  handler: {
+    directory: {
+      path:    __dirname + '/',
+      listing: false,
+      index:   false
+    }
+  }
+});
+
+app.route({
+  method: 'GET',
+  path: '/',
+  handler: function(request, reply) {
+    reply.view('./views/layouts');
+  }
+});
+*/
 /////////////   API /////////////////////////////////////////////////////
 
 function getAllApis() {
