@@ -16,6 +16,11 @@ const OroscopoSchema = new mongoose.Schema({
     default: 'aries',
     enum: ['aquarius', 'pisces', 'aries', 'taurus', 'gemini', 'cancer', 'leo', 'virgo', 'libra', 'scorpio', 'sagittarius', 'capricorn']
   },
+  oroscopo: {
+    type: String,
+    required: true,
+    default: '...NESSUN OROSCOPO SCARICATO DALLE API...',
+  },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',

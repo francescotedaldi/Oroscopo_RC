@@ -7,7 +7,11 @@
             <h6>Avendo effettuato l'accesso con Google, premendo su salva verrà creato un evento su Calendar nella
                 seguente data:</h6>
             <h6>{{formatDate createdAt 'MMMM Do YYYY'}}</h6>
-            <h6>Verrà salvato anche il tuo oroscopo nella descrizione dell'evento. Vuoi salvare?</h6>
+            <h6>Verrà salvato nella descrizione dell'evento l'oroscopo del segno:</h6>
+            <h6>{{oroscopo.segno}}</h6>
+            <h6>!!! DEBUG !!!</h6>
+            <h6>{{oroscopo.oroscopo}}</h6>
+            <h6>Vuoi salvare?</h6>
         </div>
 
         <div class="row">
@@ -18,7 +22,6 @@
 </div>
 
 <script type="text/javascript">
-
     function salvaOroscopo() {
         alert('Salvo su calendar...');
     }

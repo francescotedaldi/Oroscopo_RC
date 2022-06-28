@@ -11,12 +11,8 @@ const session = require('express-session')               //per usare passport
 const mongoose = require('mongoose')
 const MongoStore = require('connect-mongo')              //per salvare la sessione su mongoDB
 
-
-var apiUtils = require('./public/apiUtils.js');
-
 // Load config
 dotenv.config({ path: './config/dati_sensibili.env' })
-
 
 // Passport config
 require('./config/passport')(passport)

@@ -1,3 +1,4 @@
+
 const request = require('request');
 const dotenv = require('dotenv');
 
@@ -19,7 +20,7 @@ function callback(error, response, body) {
         for (var i = 0; i < Oroscopi.length; i++) {
             console.log("---> i: " + i + "\n\nsegno: " + Oroscopi[i].sign + "\ndata: " + Oroscopi[i].date + "\noroscopo: " + Oroscopi[i].horoscope + "\n\n");
         }
-        console.log('\n\n!!!! OROSCOPI CARICATO !!!!\n\n');
+        console.log('\n\n!!!! OROSCOPI[] CARICATO !!!!\n\n');
     }
 
 }
@@ -34,26 +35,26 @@ for (COUNTER; COUNTER < segnoZodiacale.length; COUNTER++) {
 
 /////////////  fine API ///////////////////////////////////////////////////
 
-function StampaOroscopoSS(segno_scelto) {
 
-    alert("StampaOroscopoSS: SS - " + SEGNO_SCELTO + "\nss - " + segno_scelto + "\nOroscopi: " + Oroscopi);
-
-    /*
-    if (Oroscopi.length == 12) {
-        for (i = 0; i < Oroscopi.length; i++) {
-            console.log("segno: " + Oroscopi[i].sign + "\ndata: " + Oroscopi[i].date + "\noroscopo: " + Oroscopi[i].horoscope + "\n\n\n\n");
-        }
+async function StampaOroscopoSS(segno_scelto) {
+    try {
+        let response = await fetch("http://ohmanda.com/api/horoscope/" + segno_scelto, { mode: 'cors' });
+        alert(response);
+        console.log(response);
+    } catch (e) {
+        console.log("!!! Si è verificato un errore !!!");
     }
-    */
 }
 
 function getSegnoScelto() {
+
+    const request = require('request');
 
     var myNodelist = document.getElementById("segno");
     document.getElementsByName("segno").innerHtml = myNodelist;
     SEGNO_SCELTO = myNodelist.value;
 
-    StampaOroscopoSS(SEGNO_SCELTO);
+    //StampaOroscopoSS(SEGNO_SCELTO);
 
-    alert("getSegnoScelto: " + SEGNO_SCELTO);
+    alert("getSegnoScelto: " + SEGNO_SCELTO + " - globale");
 }
