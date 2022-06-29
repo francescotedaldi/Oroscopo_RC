@@ -5,8 +5,11 @@ const { ensureAuth } = require('../middleware/auth')
 
 const Oroscopo = require('../models/horoscope')
 
+//const {google} = require('googleapis');
+
 var STRING_API = '';
 
+var REFRESH_TOKEN = ''; //inserire da progetto Google #Francesco
 
 // @desc    Show add page
 // @route   GET /oroscopi/add
@@ -122,6 +125,34 @@ router.get('/save/:id', ensureAuth, async (req, res) => {
   }
 })
 
+//Creazione evento su Google Calendar
+/*
+router.post('/save/:id', async(req, res, next) => {
+  try{
+    const {title, body, segno, oroscopo, user, createdAt} = req.body;
+
+    oauthToClient.setCredentials({ refresh_token: REFRESH_TOKEN });
+    const calendar = google.calendar('v3');
+
+    const response = await calendar.events.insert({
+      auth:
+      calendarId:
+      requestBody{
+        summary: oroscopo.title;
+        description: oroscopo.body + '\n\n' + oroscopo.oroscopo;
+        location: 'Roma, Italy';
+        colorId: '6';
+        startDateTime: oroscopo.createdAt;
+        endDateTime: oroscopo.createdAt;
+      }
+    })
+  }catch(error){
+    next(error);
+  }
+})
+*/
+
+/*
 // @desc    Update oroscopo
 // @route   PUT /oroscopi/:id
 router.put('/:id', ensureAuth, async (req, res) => {
@@ -147,6 +178,7 @@ router.put('/:id', ensureAuth, async (req, res) => {
     return res.render('error/500')
   }
 })
+*/
 
 // @desc    Delete oroscopo
 // @route   DELETE /oroscopi/:id
