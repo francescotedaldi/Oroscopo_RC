@@ -1,8 +1,11 @@
 const express = require('express')
 const router = express.Router()
+var request = require('request')
 const { ensureAuth } = require('../middleware/auth')
 
 const Oroscopo = require('../models/horoscope')
+
+var STRING_API = '';
 
 
 // @desc    Show add page
@@ -70,7 +73,7 @@ router.get('/:id', ensureAuth, async (req, res) => {
 // @desc    Show save page
 // @route   GET /oroscopi/save/:id
 router.get('/save/:id', ensureAuth, async (req, res) => {
-  
+
   try {
     const oroscopo = await Oroscopo.findOne({
       _id: req.params.id,
@@ -80,6 +83,31 @@ router.get('/save/:id', ensureAuth, async (req, res) => {
       return res.render('error/404')
     }
 
+    ////////////
+
+    var option = {
+      url: 'http://ohmanda.com/api/horoscope/' + oroscopo.segno
+    }
+
+    request.get(option, function (error, response, body) {
+      if (error) {
+        console.log(error);
+      } else {
+        if (response.statusCode == 200) {
+          lista = JSON.parse(body);
+          console.log('\n\n\n!!!! STAMPO API di ' + oroscopo.segno + '!!!!\n\n\n');
+          console.log(lista);
+          oroscopo.oroscopo = lista.horoscope;
+          STRING_API = lista.horoscope;
+          console.log("\n\nora oroscopo è: \n")
+          console.log(STRING_API);
+          console.log('\n\n\n');
+        }
+      }
+    })
+
+    ///////////
+
     if (oroscopo.user != req.user.id) {
       res.redirect('/oroscopi')
     } else {
@@ -87,6 +115,7 @@ router.get('/save/:id', ensureAuth, async (req, res) => {
         oroscopo,
       })
     }
+
   } catch (err) {
     console.error(err)
     return res.render('error/500')
@@ -140,4 +169,5 @@ router.delete('/:id', ensureAuth, async (req, res) => {
     return res.render('error/500')
   }
 })
+
 module.exports = router

@@ -18,8 +18,7 @@ const OroscopoSchema = new mongoose.Schema({
   },
   oroscopo: {
     type: String,
-    required: true,
-    default: '...NESSUN OROSCOPO SCARICATO DALLE API...',
+    default: '.........',
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,

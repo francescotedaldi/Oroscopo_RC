@@ -30,19 +30,12 @@ router.get('/aboutus', ensureAuth, async (req, res) => {
 router.get('/dashboard', ensureAuth, async (req, res) => {
     try {
 
-        console.log("\n\n\n\n\n\n !!! REQUEST.GET !!! \n\n\n\n\n\n");
-        console.log(req);
-
         // con lean() dovinetano oggetti js, non mongoosedocuments
         const oroscopi = await Oroscopo.find({ user: req.user.id }).lean()
 
-        console.log('\n\n\n(req.user) si è loggato')
-        console.log(req.user);
-        console.log('\n\n\n----------------> stampo i suoi oroscopi:\n\n')
+        console.log('\n\n\n----------------> /DASHBOARD stampo gli oroscopi di ' + req.user.firstName + '\n\n')
         console.log(oroscopi)
-        console.log('\n----------------> stampo il SEGNO suo primo oroscopo:\n\n')
-        console.log(oroscopi[0].segno)
-        console.log("\n !!! fine oroscopi di " + req.user.firstName + " !!! \n\n\n\n\n\n");
+        console.log("\n ------------------------- \n\n\n\n\n\n");
 
         res.render('dashboard', {
             name: req.user.firstName,
