@@ -127,20 +127,22 @@ router.get('/save/:id', ensureAuth, async (req, res) => {
 
 //Creazione evento su Google Calendar
 /*
-router.post('/save/:id', async(req, res, next) => {
+router.post('/save/:id', ensureAuth, async(req, res, next) => {
   try{
     const {title, body, segno, oroscopo, user, createdAt} = req.body;
 
-    oauthToClient.setCredentials({ refresh_token: REFRESH_TOKEN });
+    //oauthToClient.setCredentials({ refresh_token: REFRESH_TOKEN });
     const calendar = google.calendar('v3');
 
+    var description = oroscopo.body + '\n\n' + oroscopo.oroscopo;
+
     const response = await calendar.events.insert({
-      auth:
-      calendarId:
+      auth: //oauthToClient
+      calendarId: 'primary';
       requestBody{
         summary: oroscopo.title;
-        description: oroscopo.body + '\n\n' + oroscopo.oroscopo;
-        location: 'Roma, Italy';
+        description: description;
+        location: 'Rome, Italy';
         colorId: '6';
         startDateTime: oroscopo.createdAt;
         endDateTime: oroscopo.createdAt;
