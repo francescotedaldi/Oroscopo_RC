@@ -154,7 +154,7 @@ router.post('/save/:id', ensureAuth, async(req, res, next) => {
 })
 */
 
-/*
+
 // @desc    Update oroscopo
 // @route   PUT /oroscopi/:id
 router.put('/:id', ensureAuth, async (req, res) => {
@@ -180,7 +180,7 @@ router.put('/:id', ensureAuth, async (req, res) => {
     return res.render('error/500')
   }
 })
-*/
+
 
 // @desc    Delete oroscopo
 // @route   DELETE /oroscopi/:id
