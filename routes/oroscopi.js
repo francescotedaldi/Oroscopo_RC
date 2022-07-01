@@ -129,12 +129,11 @@ router.get('/save/:id', ensureAuth, async (req, res) => {
     } else {
 
       ////////////////////////////////////////
-      /*
 
       try{
         const {title, body, segno, oroscopo, user, createdAt} = req.body;
     
-        oauth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
+        //oauth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
         const calendar = google.calendar('v3');
     
         var description = oroscopo.body + '\n\n' + oroscopo.oroscopo;
@@ -154,7 +153,7 @@ router.get('/save/:id', ensureAuth, async (req, res) => {
       }catch(error){
         next(error);
       }
-*/
+
       ////////////////////////////////////////
 
 
@@ -168,36 +167,6 @@ router.get('/save/:id', ensureAuth, async (req, res) => {
     return res.render('error/500')
   }
 })
-
-
-//Creazione evento su Google Calendar
-/*
-router.post('/save/:id', ensureAuth, async(req, res, next) => {
-  try{
-    const {title, body, segno, oroscopo, user, createdAt} = req.body;
-
-    //oauthToClient.setCredentials({ refresh_token: REFRESH_TOKEN });
-    const calendar = google.calendar('v3');
-
-    var description = oroscopo.body + '\n\n' + oroscopo.oroscopo;
-
-    const response = await calendar.events.insert({
-      auth: //oauthToClient
-      calendarId: 'primary';
-      requestBody{
-        summary: oroscopo.title;
-        description: description;
-        location: 'Rome, Italy';
-        colorId: '6';
-        startDateTime: oroscopo.createdAt;
-        endDateTime: oroscopo.createdAt;
-      }
-    })
-  }catch(error){
-    next(error);
-  }
-})
-*/
 
 
 // @desc    Update oroscopo
