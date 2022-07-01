@@ -5,11 +5,19 @@ const { ensureAuth } = require('../middleware/auth')
 
 const Oroscopo = require('../models/horoscope')
 
-//const {google} = require('googleapis');
+/*
+const GOOGLE_CLIENT_ID = '879703396057-0qjva805vfpaehctbj7biq9eoujoj3me.apps.googleusercontent.com';
+const GOOGLE_CLIENT_SECRET = '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';
+const {google} = require('googleapis');
 
-var STRING_API = '';
+const oauth2Client = new google.auth.OAuth2(
+  GOOGLE_CLIENT_ID,
+  GOOGLE_CLIENT_SECRET,
+  'https://localhost:443/auth/google/callback'
+)
 
 var REFRESH_TOKEN = ''; //inserire da progetto Google #Francesco
+*/
 
 // @desc    Show add page
 // @route   GET /oroscopi/add
@@ -21,8 +29,17 @@ router.get('/add', ensureAuth, (req, res) => {
 // @route   POST /oroscopi
 router.post('/', ensureAuth, async (req, res) => {
   try {
+
+    console.log('\n\n\n\!!! PRIMA post/oroscopi stampo req.body: !!! \n\n')
+    console.log(req.body)
+
     // req.body ci da i dati che arrivano dalla form
     req.body.user = req.user.id
+
+    console.log('\n\n!!! DOPO post/oroscopi stampo req.body: !!! \n\n')
+    console.log(req.body)
+    console.log('!!!!! \n\n\n\n')
+
     await Oroscopo.create(req.body)
     res.redirect('/dashboard')
 
@@ -86,10 +103,10 @@ router.get('/save/:id', ensureAuth, async (req, res) => {
       return res.render('error/404')
     }
 
-    ////////////
+    ////////////////////////////////////////
 
     var option = {
-      url: 'http://ohmanda.com/api/horoscope/' + oroscopo.segno
+      url: 'http://ohmanda.com/api/horoscope/' + req.body.segno
     }
 
     request.get(option, function (error, response, body) {
@@ -98,22 +115,48 @@ router.get('/save/:id', ensureAuth, async (req, res) => {
       } else {
         if (response.statusCode == 200) {
           lista = JSON.parse(body);
-          console.log('\n\n\n!!!! STAMPO API di ' + oroscopo.segno + '!!!!\n\n\n');
+          console.log('\n\n\n!!!! PRENDO LE API ......... !!!!\n');
           console.log(lista);
-          oroscopo.oroscopo = lista.horoscope;
-          STRING_API = lista.horoscope;
-          console.log("\n\nora oroscopo è: \n")
-          console.log(STRING_API);
           console.log('\n\n\n');
         }
       }
     })
 
-    ///////////
+    ////////////////////////////////////////
 
     if (oroscopo.user != req.user.id) {
       res.redirect('/oroscopi')
     } else {
+
+      ////////////////////////////////////////
+
+      try{
+        const {title, body, segno, oroscopo, user, createdAt} = req.body;
+    
+        //oauth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
+        const calendar = google.calendar('v3');
+    
+        var description = oroscopo.body + '\n\n' + oroscopo.oroscopo;
+    
+        const response = await calendar.events.insert({
+          auth: oauth2Client,
+          calendarId: 'primary',
+          requestBody: {
+            summary: oroscopo.title,
+            description: 'EVENTO DI PROVA',
+            location: 'Rome, Italy',
+            colorId: '6',
+            startDateTime: oroscopo.createdAt,
+            endDateTime: oroscopo.createdAt,
+          }
+        })
+      }catch(error){
+        next(error);
+      }
+
+      ////////////////////////////////////////
+
+
       res.render('oroscopi/save', {
         oroscopo,
       })
@@ -124,35 +167,6 @@ router.get('/save/:id', ensureAuth, async (req, res) => {
     return res.render('error/500')
   }
 })
-
-//Creazione evento su Google Calendar
-/*
-router.post('/save/:id', ensureAuth, async(req, res, next) => {
-  try{
-    const {title, body, segno, oroscopo, user, createdAt} = req.body;
-
-    //oauthToClient.setCredentials({ refresh_token: REFRESH_TOKEN });
-    const calendar = google.calendar('v3');
-
-    var description = oroscopo.body + '\n\n' + oroscopo.oroscopo;
-
-    const response = await calendar.events.insert({
-      auth: //oauthToClient
-      calendarId: 'primary';
-      requestBody{
-        summary: oroscopo.title;
-        description: description;
-        location: 'Rome, Italy';
-        colorId: '6';
-        startDateTime: oroscopo.createdAt;
-        endDateTime: oroscopo.createdAt;
-      }
-    })
-  }catch(error){
-    next(error);
-  }
-})
-*/
 
 
 // @desc    Update oroscopo
