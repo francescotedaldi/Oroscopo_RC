@@ -9,7 +9,7 @@ const pp = require('../config/passport')
 // @route   GET /auth/google
 
 // ---> 'https://www.googleapis.com/auth/drive.file'  || 'profile' <---
-router.get('/google', passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/calendar.events' , 'https://www.googleapis.com/auth/userinfo.email' ,'https://www.googleapis.com/auth/userinfo.profile'] }))
+router.get('/google', passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/calendar' , 'https://www.googleapis.com/auth/userinfo.profile' , 'https://www.googleapis.com/auth/userinfo.email'] }))
 
 
 // @desc    Google auth callback

@@ -12,6 +12,7 @@ const Oroscopo = require('../models/horoscope');
 // @route   GET /
 // solo chi non è loggato dovrebbe vederlo (ensureGuest)
 router.get('/', ensureGuest, (req, res) => {
+
     res.render('login', {
         layout: 'login',
     })
@@ -29,6 +30,10 @@ router.get('/aboutus', ensureAuth, async (req, res) => {
 // solo chi è loggato dovrebbe vederlo (ensureAuth)
 router.get('/dashboard', ensureAuth, async (req, res) => {
     try {
+
+        console.log('\n----------------> /DASHBOARD req.session\n')
+        console.log(req.session)
+        console.log("\n ------------------------- \n\n\n");
 
         // con lean() dovinetano oggetti js, non mongoosedocuments
         const oroscopi = await Oroscopo.find({ user: req.user.id }).lean()

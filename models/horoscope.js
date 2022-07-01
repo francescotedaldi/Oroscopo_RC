@@ -14,7 +14,7 @@ const OroscopoSchema = new mongoose.Schema({
     type: String,
     required: true,
     default: 'aries',
-    enum: ['aquarius', 'pisces', 'aries', 'taurus', 'gemini', 'cancer', 'leo', 'virgo', 'libra', 'scorpio', 'sagittarius', 'capricorn']
+    //enum: ['aquarius', 'pisces', 'aries', 'taurus', 'gemini', 'cancer', 'leo', 'virgo', 'libra', 'scorpio', 'sagittarius', 'capricorn']
   },
   oroscopo: {
     type: String,
