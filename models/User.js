@@ -30,6 +30,7 @@ const UserSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  
 })
 
 //esportiamo i dati di un utente

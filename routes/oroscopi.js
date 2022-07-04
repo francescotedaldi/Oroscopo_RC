@@ -142,16 +142,20 @@ router.get('/save/:id', ensureAuth, async (req, res) => {
           auth: oauth2Client,
           calendarId: 'primary',
           requestBody: {
-            summary: oroscopo.title,
+            summary: "oroscopo.title",
             description: 'EVENTO DI PROVA',
             location: 'Rome, Italy',
             colorId: '6',
             startDateTime: oroscopo.createdAt,
-            endDateTime: oroscopo.createdAt,
+            endDateTime: oroscopo.createdAt
           }
+
         })
+        console.log("///////////////////////////////STAMPO IL BODY///////////////////////////////\n\n\n")
+        console.log(requestBody)
+        console.log("///////////////////////////////STAMPO IL BODY///////////////////////////////\n\n\n")
       }catch(error){
-        next(error);
+        console.error(error);
       }
 
       ////////////////////////////////////////

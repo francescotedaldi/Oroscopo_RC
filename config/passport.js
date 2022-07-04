@@ -22,9 +22,8 @@ module.exports = function (passport) {
           firstName: profile.name.givenName,
           lastName: profile.name.familyName,
           email: profile.emails[0].value,
-          image: profile.photos[0].value,
-          access_token: accessToken,
-          refresh_token: refreshToken
+          image: profile.photos[0].value
+          
         }
 
         // per salvare l'utente
@@ -32,7 +31,6 @@ module.exports = function (passport) {
           let user = await User.findOne({ googleId: profile.id })
 
           if (user) {
-            mailer.sendWelcomeMail(profile.emails[0].value)
             done(null, user)
           } else {
             user = await User.create(newUser)
