@@ -2,22 +2,8 @@ const express = require('express')
 const router = express.Router()
 var request = require('request')
 const { ensureAuth } = require('../middleware/auth')
-
 const Oroscopo = require('../models/horoscope')
-
-/*
-const GOOGLE_CLIENT_ID = '879703396057-0qjva805vfpaehctbj7biq9eoujoj3me.apps.googleusercontent.com';
-const GOOGLE_CLIENT_SECRET = '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';
 const {google} = require('googleapis');
-
-const oauth2Client = new google.auth.OAuth2(
-  GOOGLE_CLIENT_ID,
-  GOOGLE_CLIENT_SECRET,
-  'https://localhost:443/auth/google/callback'
-)
-
-var REFRESH_TOKEN = ''; //inserire da progetto Google #Francesco
-*/
 
 // @desc    Show add page
 // @route   GET /oroscopi/add
@@ -103,64 +89,89 @@ router.get('/save/:id', ensureAuth, async (req, res) => {
       return res.render('error/404')
     }
 
-    ////////////////////////////////////////
+    /////// Prendo API - Creo evento in Google Calendar///////
 
-    var option = {
-      url: 'http://ohmanda.com/api/horoscope/' + req.body.segno
+    var urlApi = {
+      url: 'http://ohmanda.com/api/horoscope/' + oroscopo.segno
     }
+    
+    function callback(error, response, body) {
+      var jsonContent = JSON.parse(body);
+      var info_api = JSON.stringify(jsonContent.horoscope);
+      oroscopo.oroscopo = info_api;
+      
+      const calendar = google.calendar({ version: 'v3' });
+    
+      const description = oroscopo.body + '\n\n' + oroscopo.oroscopo;
+      const eventStartTime = new Date();
+      const eventEndTime = new Date();
 
-    request.get(option, function (error, response, body) {
-      if (error) {
-        console.log(error);
-      } else {
-        if (response.statusCode == 200) {
-          lista = JSON.parse(body);
-          console.log('\n\n\n!!!! PRENDO LE API ......... !!!!\n');
-          console.log(lista);
-          console.log('\n\n\n');
+      calendar.events.insert({
+        oauth_token: req.session.accessToken,
+        calendarId: 'primary',
+        requestBody: {
+          summary: oroscopo.title,
+          description: description,
+          location: 'Rome, Italy',
+          colorId: '6',
+          start: {
+            dateTime: eventStartTime,
+            timeZone: "Europe/Rome",
+          },
+          end: {
+            dateTime: eventEndTime,
+            timeZone: "Europe/Rome",
+          },
         }
-      }
-    })
-
-    ////////////////////////////////////////
+      })
+    }
+    request.get(urlApi.url, callback);
+    console.log("Evento salvato in Google Calendar");
+    ///////// Fine Prendo API - Creo evento in Google Calendar /////////
 
     if (oroscopo.user != req.user.id) {
       res.redirect('/oroscopi')
-    } else {
+    }
+    else {
+    
+    /*
+    //////CREAZIONE EVENTO GOOGLE CALENDAR//////
+      try {
+        //const {title, body, segno, oroscopo, user, createdAt} = req.body;
 
-      ////////////////////////////////////////
+        const calendar = google.calendar({ version: 'v3' });
+    
+        const description = oroscopo.body + '\n\n' + oroscopo.oroscopo;
+        const eventStartTime = new Date();
+        const eventEndTime = new Date();
 
-      try{
-        const {title, body, segno, oroscopo, user, createdAt} = req.body;
-    
-        //oauth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
-        const calendar = google.calendar('v3');
-    
-        var description = oroscopo.body + '\n\n' + oroscopo.oroscopo;
-    
         const response = await calendar.events.insert({
-          auth: oauth2Client,
+          oauth_token: req.session.accessToken,
           calendarId: 'primary',
           requestBody: {
-            summary: "oroscopo.title",
-            description: 'EVENTO DI PROVA',
+            summary: oroscopo.title,
+            description: description,
             location: 'Rome, Italy',
             colorId: '6',
-            startDateTime: oroscopo.createdAt,
-            endDateTime: oroscopo.createdAt
+            start: {
+              dateTime: eventStartTime,
+              timeZone: "Europe/Rome",
+            },
+            end: {
+              dateTime: eventEndTime,
+              timeZone: "Europe/Rome",
+            },
           }
-
         })
-        console.log("///////////////////////////////STAMPO IL BODY///////////////////////////////\n\n\n")
-        console.log(requestBody)
-        console.log("///////////////////////////////STAMPO IL BODY///////////////////////////////\n\n\n")
-      }catch(error){
+
+  
+
+      }catch(error) {
         console.error(error);
       }
 
       ////////////////////////////////////////
-
-
+      */
       res.render('oroscopi/save', {
         oroscopo,
       })

@@ -33,6 +33,8 @@ router.get('/dashboard', ensureAuth, async (req, res) => {
 
         console.log('\n----------------> /DASHBOARD req.session\n')
         console.log(req.session)
+        console.log("ACCESS TOKEN: " + req.session.accessToken)
+        console.log("REQUEST TOKEN: " + req.session.refreshToken)
         console.log("\n ------------------------- \n\n\n");
 
         // con lean() dovinetano oggetti js, non mongoosedocuments

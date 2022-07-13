@@ -13,9 +13,12 @@ module.exports = function (passport) {
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         callbackURL: "https://localhost:443/auth/google/callback",
+        passReqToCallback: true,
       },
 
-      async (accessToken, refreshToken, profile, done) => {
+      async (req, accessToken, refreshToken, profile, done) => {
+        req.session.accessToken = accessToken;
+        req.session.refreshToken = refreshToken;
         const newUser = {
           googleId: profile.id,
           displayName: profile.displayName,
@@ -23,7 +26,6 @@ module.exports = function (passport) {
           lastName: profile.name.familyName,
           email: profile.emails[0].value,
           image: profile.photos[0].value
-          
         }
 
         // per salvare l'utente
