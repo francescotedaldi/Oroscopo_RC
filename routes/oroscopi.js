@@ -16,15 +16,10 @@ router.get('/add', ensureAuth, (req, res) => {
 router.post('/', ensureAuth, async (req, res) => {
   try {
 
-    console.log('\n\n\n\!!! PRIMA post/oroscopi stampo req.body: !!! \n\n')
-    console.log(req.body)
-
     // req.body ci da i dati che arrivano dalla form
     req.body.user = req.user.id
 
-    console.log('\n\n!!! DOPO post/oroscopi stampo req.body: !!! \n\n')
-    console.log(req.body)
-    console.log('!!!!! \n\n\n\n')
+    console.log('\n\n\n')
 
     await Oroscopo.create(req.body)
     res.redirect('/dashboard')
@@ -134,44 +129,6 @@ router.get('/save/:id', ensureAuth, async (req, res) => {
     }
     else {
     
-    /*
-    //////CREAZIONE EVENTO GOOGLE CALENDAR//////
-      try {
-        //const {title, body, segno, oroscopo, user, createdAt} = req.body;
-
-        const calendar = google.calendar({ version: 'v3' });
-    
-        const description = oroscopo.body + '\n\n' + oroscopo.oroscopo;
-        const eventStartTime = new Date();
-        const eventEndTime = new Date();
-
-        const response = await calendar.events.insert({
-          oauth_token: req.session.accessToken,
-          calendarId: 'primary',
-          requestBody: {
-            summary: oroscopo.title,
-            description: description,
-            location: 'Rome, Italy',
-            colorId: '6',
-            start: {
-              dateTime: eventStartTime,
-              timeZone: "Europe/Rome",
-            },
-            end: {
-              dateTime: eventEndTime,
-              timeZone: "Europe/Rome",
-            },
-          }
-        })
-
-  
-
-      }catch(error) {
-        console.error(error);
-      }
-
-      ////////////////////////////////////////
-      */
       res.render('oroscopi/save', {
         oroscopo,
       })
