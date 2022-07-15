@@ -16,26 +16,18 @@ jobs:
         run: docker-compose up -d --build
 
       #3
-      - name: Waiting the startup sequence 
-        run: sleep 30s
-
-      #4
       - name: Install node 
         uses: actions/setup-node@v3
 
+      #4
+      - name: install dependencies
+        run: npm install
+
       #5
-      - name: install mocha
-        run: npm install -g mocha
-
-      #6
-      - name: install axios
-        run: npm install -g axios
-
-      #7
       - name: Run Test
         run: npm test
 
-      #8
+      #6
       - name: Stop
         if: always() 
         run: docker-compose down

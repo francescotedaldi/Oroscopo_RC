@@ -5,14 +5,24 @@ const { ensureAuth } = require('../middleware/auth')
 const Oroscopo = require('../models/horoscope')
 const {google} = require('googleapis');
 
-// @desc    Show add page
-// @route   GET /oroscopi/add
+
+
+/**
+ * @api {get} /oroscopi/add Get add page
+ * @apiName GetAdd
+ * @apiGroup Oroscopi
+ */
+
 router.get('/add', ensureAuth, (req, res) => {
   res.render('oroscopi/add')
 })
 
-// @desc    Process add form
-// @route   POST /oroscopi
+/**
+ * @api {post} /oroscopi Post single oroscopo
+ * @apiName PostOroscopo
+ * @apiGroup Oroscopi
+ */
+
 router.post('/', ensureAuth, async (req, res) => {
   try {
 
@@ -30,8 +40,12 @@ router.post('/', ensureAuth, async (req, res) => {
   }
 })
 
-// @desc    Show all oroscopi
-// @route   GET /oroscopi
+/**
+ * @api {get} /oroscopi Get all oroscopi
+ * @apiName GetOroscopi
+ * @apiGroup Oroscopi
+ */
+
 router.get('/', ensureAuth, async (req, res) => {
   try {
     const oroscopi = await Oroscopo.find({})
@@ -48,8 +62,36 @@ router.get('/', ensureAuth, async (req, res) => {
   }
 })
 
-// @desc    Show single oroscopo
-// @route   GET /oroscopi/:id
+/**
+ * @api {get} /oroscopi/:id Get single oroscopo
+ * @apiName GetOroscopo
+ * @apiGroup Oroscopi
+ * @apiParam {Number} id User ID
+ * @apiSuccess {json} returns a post
+ * @apiSuccessExample {json} Success-Response:
+ * 
+ * HTTP/1.1 200 OK
+ * 
+ * {
+ *   _id: new ObjectId("62d18b07ad65ca40e349ffe0"),
+ *   title: 'title_example',
+ *   body: '<p>body_example</p>,
+ *   segno: 'cancer',
+ *   user: new ObjectId("62c2b71221c49f5f1c0335f0"),
+ *   createdAt: 2022-07-15T15:43:03.852Z,
+ *   __v: 0
+ * }
+ * 
+ * @apiError OroscopeNotFound The Id of the oroscope is not found.
+ *
+ * @apiErrorExample Error-Response:
+ * 
+ *HTTP/1.1 404 Not Found
+ * {
+ *   "error": "OroscopeNotFound"
+ * }
+ */
+
 router.get('/:id', ensureAuth, async (req, res) => {
   try {
     let oroscopo = await Oroscopo.findById(req.params.id).populate('user').lean()
@@ -71,8 +113,13 @@ router.get('/:id', ensureAuth, async (req, res) => {
   }
 })
 
-// @desc    Show save page
-// @route   GET /oroscopi/save/:id
+/**
+ * @api {get} /oroscopi/save/:id Get save page
+ * @apiName GetSave
+ * @apiGroup Oroscopi
+ * @apiParam {Number} id User ID
+ */
+
 router.get('/save/:id', ensureAuth, async (req, res) => {
 
   try {
@@ -141,8 +188,13 @@ router.get('/save/:id', ensureAuth, async (req, res) => {
 })
 
 
-// @desc    Update oroscopo
-// @route   PUT /oroscopi/:id
+/**
+ * @api {put} /oroscopi/:id Update single oroscopo
+ * @apiName PutOroscopo
+ * @apiGroup Oroscopi
+ * @apiParam {Number} id User ID
+ */
+
 router.put('/:id', ensureAuth, async (req, res) => {
   try {
     let oroscopo = await Oroscopo.findById(req.params.id).lean()
@@ -168,8 +220,13 @@ router.put('/:id', ensureAuth, async (req, res) => {
 })
 
 
-// @desc    Delete oroscopo
-// @route   DELETE /oroscopi/:id
+/**
+ * @api {delete} /oroscopi/:id Delete single oroscopo
+ * @apiName DeleteOroscopo
+ * @apiGroup Oroscopi
+ * @apiParam {Number} id User ID
+ */
+
 router.delete('/:id', ensureAuth, async (req, res) => {
   try {
     let oroscopo = await Oroscopo.findById(req.params.id).lean()

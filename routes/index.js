@@ -3,6 +3,14 @@ var request = require('request');
 const router = express.Router()
 
 
+/*
+ * @api {get} /login Get logins
+ * @apiName GetLogin
+ * @apiGroup Login
+ */
+
+
+
 // prendi le funzioni per il corretto redirecting
 const { ensureAuth, ensureGuest } = require('../middleware/auth');
 const Oroscopo = require('../models/horoscope');
