@@ -3,7 +3,9 @@ const mongoose = require('mongoose')
 const User = require('../models/User')  //prende i dati utente
 const auth = require('../routes/auth')
 const mailer = require("../middleware/mailSender") //invia email di benvenuto
-
+const amqp = require('amqplib/callback_api') //AMQP per RabbitMQ
+const sender = require("../middleware/sender")
+const receiver = require("../middleware/receiver")
 
 // l'input passport provine da passport config in app.js
 module.exports = function (passport) {
@@ -32,9 +34,13 @@ module.exports = function (passport) {
         try {
           let user = await User.findOne({ googleId: profile.id })
 
+          //Se l'user è già presente
           if (user) {
-            done(null, user)
-          } else {
+            sender.send();
+            receiver.recv();
+            done(null, user);
+          } 
+          else {
             user = await User.create(newUser)
             mailer.sendWelcomeMail(profile.emails[0].value)
             done(null, user)
