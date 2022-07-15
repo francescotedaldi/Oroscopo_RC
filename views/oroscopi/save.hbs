@@ -1,28 +1,9 @@
-<h3>Salva Oroscopo</h3>
-
+<h3>Congratulazioni! il tuo oroscopo è stato salvato con successo</h3>
+<h6>Hai salvato il Diario con titolo: {{oroscopo.title}}</h6>
+<h6>Segno dell' oroscopo: {{oroscopo.segno}}</h6>
+<h3></h3>
+<h5>Puoi visualizzare l'oroscopo salvato su <a href="https://calendar.google.com/calendar" target="_blank">Google Calendar</a></h5>
+<h3></h3>
 <div class="row">
-    <form action="/oroscopi/{{oroscopo._id}}" method="POST" class="col s12">
-        <input type="hidden" name="_method" value="PUT">
-        <div class="row">
-            <h6>Avendo effettuato l'accesso con Google, premendo su salva verrà creato un evento su Calendar nella
-                seguente data:</h6>
-            <h6>{{formatDate createdAt 'MMMM Do YYYY'}}</h6>
-            <h6>Stai salvando il Diario con titolo: {{oroscopo.title}}</h6>
-            <h6>Segno dell' oroscopo: {{oroscopo.segno}}</h6>
-            <h6>L'oroscopo di oggi:</h6>
-            <h6>{{oroscopo.oroscopo}}</h6>
-            <h6>Vuoi salvare?</h6>
-        </div>
-
-        <div class="row">
-            <input type="submit" value="Save" class="btn" onclick='salvaOroscopo()'>
-            <a href="/dashboard" class="btn orange">Cancel</a>
-        </div>
-    </form>
+    <a href="/dashboard" class="btn orange">Torna alla Dashboard</a>
 </div>
-
-<script type="text/javascript">
-    function salvaOroscopo() {
-        alert('Salvo su calendar...');
-    }
-</script>

@@ -31,18 +31,12 @@ router.get('/aboutus', ensureAuth, async (req, res) => {
 router.get('/dashboard', ensureAuth, async (req, res) => {
     try {
 
-        console.log('\n----------------> /DASHBOARD req.session\n')
-        console.log(req.session)
-        console.log("ACCESS TOKEN: " + req.session.accessToken)
-        console.log("REQUEST TOKEN: " + req.session.refreshToken)
-        console.log("\n ------------------------- \n\n\n");
-
         // con lean() dovinetano oggetti js, non mongoosedocuments
         const oroscopi = await Oroscopo.find({ user: req.user.id }).lean()
 
         console.log('\n\n\n----------------> /DASHBOARD si è loggato: \n\n')
         console.log(req.user);
-        console.log('\n----------------> /DASHBOARD stampo gli oroscopi di ' + req.user.firstName + '\n\n')
+        console.log('\n----------------> /DASHBOARD stampo i diari di ' + req.user.firstName + '\n\n')
         console.log(oroscopi)
         console.log("\n ------------------------- \n\n\n\n\n\n");
 
