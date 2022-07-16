@@ -29,11 +29,7 @@ module.exports = {
         pass: process.env.SERVER_SECRET,
       },
     };
-    /*
-    transporter
-      .sendMail(mailOptions)
-      .catch((err) => console.error(err.message));
-    */
+
     transporter.sendMail(mailOptions, (err, info) => {
       if (err) {
           console.error(err.message)

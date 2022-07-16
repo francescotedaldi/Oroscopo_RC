@@ -2,7 +2,6 @@ const amqp = require('amqplib/callback_api');
 
 module.exports = {
     recv: () => {
-        // Consuma messaggio nella queue di RabbitMQ
         // Step 1: Create Connection
         amqp.connect('amqp://user:password@rabbit', (connError, connection) => {
             if (connError) {

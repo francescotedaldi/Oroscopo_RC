@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 
-// un utente deve avere questi dati
 const UserSchema = new mongoose.Schema({
   googleId: {
     type: String,
@@ -33,5 +32,5 @@ const UserSchema = new mongoose.Schema({
   
 })
 
-//esportiamo i dati di un utente
+
 module.exports = mongoose.model('User', UserSchema)

@@ -1,9 +1,9 @@
 const GoogleStrategy = require('passport-google-oauth20').Strategy
 const mongoose = require('mongoose')
-const User = require('../models/User')  //prende i dati utente
+const User = require('../models/User')
 const auth = require('../routes/auth')
-const mailer = require("../middleware/mailSender") //invia email di benvenuto
-const amqp = require('amqplib/callback_api') //AMQP per RabbitMQ
+const mailer = require("../middleware/mailSender")
+const amqp = require('amqplib/callback_api')
 const sender = require("../middleware/sender")
 const receiver = require("../middleware/receiver")
 
@@ -30,16 +30,14 @@ module.exports = function (passport) {
           image: profile.photos[0].value
         }
 
-        // per salvare l'utente
         try {
           let user = await User.findOne({ googleId: profile.id })
 
-          //Se l'user è già presente
           if (user) {
             sender.send();
             receiver.recv();
             done(null, user);
-          } 
+          }
           else {
             user = await User.create(newUser)
             mailer.sendWelcomeMail(profile.emails[0].value)
@@ -52,7 +50,6 @@ module.exports = function (passport) {
     )
   )
 
-  // controlla documentazione passport per capire bene cos'è un serializeUser
   passport.serializeUser((user, done) => {
     done(null, user.id)
   })

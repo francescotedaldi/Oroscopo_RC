@@ -5,9 +5,6 @@ const { ensureAuth } = require('../middleware/auth')
 const Oroscopo = require('../models/horoscope')
 const {google} = require('googleapis');
 
-
-
-
 router.get('/add', ensureAuth, (req, res) => {
   res.render('oroscopi/add')
 })
@@ -45,7 +42,6 @@ router.get('/add', ensureAuth, (req, res) => {
 router.post('/', ensureAuth, async (req, res) => {
   try {
 
-    // req.body ci da i dati che arrivano dalla form
     req.body.user = req.user.id
 
     console.log('\n\n\n')
@@ -178,7 +174,7 @@ router.get('/save/:id', ensureAuth, async (req, res) => {
       return res.render('error/404')
     }
 
-    /////// Prendo API - Creo evento in Google Calendar///////
+    /////// Prendo API e creo evento in Google Calendar ///////
 
     var urlApi = {
       url: 'http://ohmanda.com/api/horoscope/' + oroscopo.segno
@@ -216,7 +212,8 @@ router.get('/save/:id', ensureAuth, async (req, res) => {
     }
     request.get(urlApi.url, callback);
     console.log("Evento salvato in Google Calendar");
-    ///////// Fine Prendo API - Creo evento in Google Calendar /////////
+
+    ///////// Fine Prendo API e creo evento in Google Calendar /////////
 
     if (oroscopo.user != req.user.id) {
       res.redirect('/oroscopi')

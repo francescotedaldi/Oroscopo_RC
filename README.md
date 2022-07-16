@@ -18,7 +18,7 @@ Questa applicazione è stata sviluppata interamente da studenti del corso di Ret
 - Viene utilizzato il protocollo asincrono SMTP per lo scambio di email e rabbitmq per verificare l'avvenuto login (utilizzo di almeno un protocollo asincrono);
 - Viene fatto l'accesso a due servizi REST tra cui Google (utilizzo di almeno due servizi REST di terze parti);
 - Il servizio rest di Google è acceduto tramite OAUTH2.0 (utilizzo di OAUTH);
-- Sono implementati dei test tramite Chai (automazione del processo di test);
+- Sono implementati dei test tramite Mocha e Chai (automazione del processo di test);
 - E' implementata una forma di CI/CD tramite github actions (utilizzo delle github actions);
 - Offre API documentate tramite APIDOC (creazione API)
 
