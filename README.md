@@ -15,7 +15,7 @@ Questa applicazione è stata sviluppata interamente da studenti del corso di Ret
 - Utilizzo di Nginx che svolge il ruolo di web server;
 - Utilizzo di due container Node che svolgono il ruolo di application server;
 - Nginx è in grado di comunicare sulla porta 443 in https (Inserimento requisiti di sicurezza);
-- Viene utilizzato il protocollo asincrono SMTP per lo scambio di email e rabbitmq per verificare l'avvenuto login (utilizzo di almeno un protocollo asincrono);
+- Viene utilizzato il protocollo asincrono SMTP per lo scambio di email e RabbitMQ per verificare l'avvenuto login (utilizzo di almeno un protocollo asincrono);
 - Viene fatto l'accesso a due servizi REST tra cui Google (utilizzo di almeno due servizi REST di terze parti);
 - Il servizio rest di Google è acceduto tramite OAUTH2.0 (utilizzo di OAUTH);
 - Sono implementati dei test tramite Mocha e Chai (automazione del processo di test);
@@ -26,18 +26,18 @@ Questa applicazione è stata sviluppata interamente da studenti del corso di Ret
 
 Il progetto consiste in un portale nel quale si accede tramite Google che permette di creare un diario personale con l'aggiunta di un oroscopo preso dal sito ['ohmanda.com/api/horoscope/'](http://ohmanda.com/api/horoscope/) e permette di salvarlo sul proprio Google Calendar come evento.
 
-## configurazione
+## Configurazione
 
 Spostarsi nella cartella config e compilare i campi del file dati_sensibili.env nel seguente modo:
 
 ```
 PORT = 3000
 MONGO_URI = mongodb+srv://teddyfra:1312@oroscoporc.bymuw.mongodb.net/OroscopoRC?retryWrites=true&w=majority
-GOOGLE_CLIENT_ID = il tuo client id
-GOOGLE_CLIENT_SECRET = il tuo client secret
+GOOGLE_CLIENT_ID = 'il tuo client id'
+GOOGLE_CLIENT_SECRET = 'il tuo client secret'
 URL_API = 'http://ohmanda.com/api/horoscope/'
-SERVER_MAIL = email da associare al server
-SERVER_SECRET = password della mail associata al server
+SERVER_MAIL = 'email da associare al server'
+SERVER_SECRET = 'password della mail associata al server'
 ```
 
 **IMPORTANTE**: i valori di GOOGLE_CLIENT_ID e di GOOGLE_CLIENT_SECRET devono essere presi dalla sezione credenziali di [Google Cloud Console](https://console.cloud.google.com/apis/) creandone di nuove.
