@@ -7,7 +7,7 @@ Questa applicazione è stata sviluppata interamente da studenti del corso di Ret
 - Giovanni Milletti - 1884164
 
 ## Architettura
-![ArchitetturaProgetto] (https://github.com/francescotedaldi/Oroscopo_RC/blob/main/Architettura_OroscopoRC.png)
+![alt text](https://github.com/francescotedaldi/Oroscopo_RC/blob/main/Architettura_OroscopoRC.png)
 
 ## Caratteristiche del progetto e requisiti
 
