@@ -7,7 +7,7 @@ Questa applicazione è stata sviluppata interamente da studenti del corso di Ret
 - Giovanni Milletti - 1884164
 
 ## Architettura
-[!ArchitetturaProgetto] Architettura_OroscopoRC.png
+![ArchitetturaProgetto] (Architettura_OroscopoRC.png)
 
 ## Caratteristiche del progetto e requisiti
 
