@@ -20,14 +20,18 @@ jobs:
         uses: actions/setup-node@v3
 
       #4
+      - name: Install mocha
+        run: npm install -g mocha
+
+      #5
       - name: install dependencies
         run: npm install
 
-      #5
+      #6
       - name: Run Test
         run: npm test
 
-      #6
+      #7
       - name: Stop
         if: always() 
         run: docker-compose down

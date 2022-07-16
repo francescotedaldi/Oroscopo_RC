@@ -7,11 +7,6 @@ const {google} = require('googleapis');
 
 
 
-/**
- * @api {get} /oroscopi/add Get add page
- * @apiName GetAdd
- * @apiGroup Oroscopi
- */
 
 router.get('/add', ensureAuth, (req, res) => {
   res.render('oroscopi/add')
@@ -21,6 +16,30 @@ router.get('/add', ensureAuth, (req, res) => {
  * @api {post} /oroscopi Post single oroscopo
  * @apiName PostOroscopo
  * @apiGroup Oroscopi
+ * @apiSuccess {json} returns the newly created post
+ * @apiSuccessExample {json} Success-Response:
+ * 
+ * HTTP/1.1 200 OK
+ * 
+ * {
+ *   _id: new ObjectId("62d18b07ad65ca40e349ffe0"),
+ *   title: 'title_example',
+ *   body: '<p>body_example</p>,
+ *   segno: 'cancer',
+ *   user: new ObjectId("62c2b71221c49f5f1c0335f0"),
+ *   createdAt: 2022-07-15T15:43:03.852Z,
+ *   __v: 0
+ * }
+ * 
+ * @apiError OroscopeNotFound The Id of the oroscope is not found.
+ *
+ * @apiErrorExample Error-Response:
+ * 
+ * HTTP/1.1 404 Not Found
+ * 
+ * {
+ *   "error": "OroscopeNotFound"
+ * }
  */
 
 router.post('/', ensureAuth, async (req, res) => {
@@ -44,6 +63,39 @@ router.post('/', ensureAuth, async (req, res) => {
  * @api {get} /oroscopi Get all oroscopi
  * @apiName GetOroscopi
  * @apiGroup Oroscopi
+ * @apiSuccess {json} returns all the posts in the database
+ * @apiSuccessExample {json} Success-Response:
+ * 
+ * HTTP/1.1 200 OK
+ * 
+ * {
+ *   _id: new ObjectId("62d18b07ad65ca40e349ffe0"),
+ *   title: 'title1_example',
+ *   body: '<p>body1_example</p>,
+ *   segno: 'cancer',
+ *   user: new ObjectId("62c2b71221c49f5f1c0335f0"),
+ *   createdAt: 2022-07-15T15:43:03.852Z,
+ *   __v: 0
+ * },
+ * 
+ * {
+ *   _id: new ObjectId("74a44g78bg81hh12c099jja2"),
+ *   title: 'title2_example',
+ *   body: '<p>body2_example</p>,
+ *   segno: 'gemini',
+ *   user: new ObjectId("56u8k12769a71x1j7n7741x5"),
+ *   createdAt: 2022-07-15T15:22:19.147Z,
+ *   __v: 0
+ * }
+ * 
+ * @apiError OroscopeNotFound The Id of the oroscope is not found.
+ * 
+ * @apiErrorExample Error-Response:
+ * 
+ * HTTP/1.1 404 Not Found
+ * {
+ *   "error": "OroscopeNotFound"
+ * }
  */
 
 router.get('/', ensureAuth, async (req, res) => {
@@ -66,8 +118,8 @@ router.get('/', ensureAuth, async (req, res) => {
  * @api {get} /oroscopi/:id Get single oroscopo
  * @apiName GetOroscopo
  * @apiGroup Oroscopi
- * @apiParam {Number} id User ID
- * @apiSuccess {json} returns a post
+ * @apiParam {Number} id post ID
+ * @apiSuccess {json} returns a post made by the user specified in the user field in the response body
  * @apiSuccessExample {json} Success-Response:
  * 
  * HTTP/1.1 200 OK
@@ -86,7 +138,8 @@ router.get('/', ensureAuth, async (req, res) => {
  *
  * @apiErrorExample Error-Response:
  * 
- *HTTP/1.1 404 Not Found
+ * HTTP/1.1 404 Not Found
+ * 
  * {
  *   "error": "OroscopeNotFound"
  * }
@@ -113,12 +166,6 @@ router.get('/:id', ensureAuth, async (req, res) => {
   }
 })
 
-/**
- * @api {get} /oroscopi/save/:id Get save page
- * @apiName GetSave
- * @apiGroup Oroscopi
- * @apiParam {Number} id User ID
- */
 
 router.get('/save/:id', ensureAuth, async (req, res) => {
 
@@ -192,7 +239,31 @@ router.get('/save/:id', ensureAuth, async (req, res) => {
  * @api {put} /oroscopi/:id Update single oroscopo
  * @apiName PutOroscopo
  * @apiGroup Oroscopi
- * @apiParam {Number} id User ID
+ * @apiParam {Number} id post ID
+ * @apiSuccess {json} returns the modified post
+ * @apiSuccessExample {json} Success-Response:
+ * 
+ * HTTP/1.1 200 OK
+ * 
+ * {
+ *   _id: new ObjectId("62d18b07ad65ca40e349ffe0"),
+ *   title: 'title_example',
+ *   body: '<p>body_example</p>,
+ *   segno: 'cancer',
+ *   user: new ObjectId("62c2b71221c49f5f1c0335f0"),
+ *   createdAt: 2022-07-15T15:43:03.852Z,
+ *   __v: 0
+ * }
+ * 
+ * @apiError OroscopeNotFound The Id of the oroscope is not found.
+ *
+ * @apiErrorExample Error-Response:
+ * 
+ * HTTP/1.1 404 Not Found
+ * 
+ * {
+ *   "error": "OroscopeNotFound"
+ * }
  */
 
 router.put('/:id', ensureAuth, async (req, res) => {
@@ -224,7 +295,31 @@ router.put('/:id', ensureAuth, async (req, res) => {
  * @api {delete} /oroscopi/:id Delete single oroscopo
  * @apiName DeleteOroscopo
  * @apiGroup Oroscopi
- * @apiParam {Number} id User ID
+ * @apiParam {Number} id post ID
+ * @apiSuccess {json} returns the deleted post
+ * @apiSuccessExample {json} Success-Response:
+ * 
+ * HTTP/1.1 200 OK
+ * 
+ * {
+ *   _id: new ObjectId("62d18b07ad65ca40e349ffe0"),
+ *   title: 'title_example',
+ *   body: '<p>body_example</p>,
+ *   segno: 'cancer',
+ *   user: new ObjectId("62c2b71221c49f5f1c0335f0"),
+ *   createdAt: 2022-07-15T15:43:03.852Z,
+ *   __v: 0
+ * }
+ * 
+ * @apiError OroscopeNotFound The Id of the oroscope is not found.
+ *
+ * @apiErrorExample Error-Response:
+ * 
+ * HTTP/1.1 404 Not Found
+ * 
+ * {
+ *   "error": "OroscopeNotFound"
+ * }
  */
 
 router.delete('/:id', ensureAuth, async (req, res) => {
