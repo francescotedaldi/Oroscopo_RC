@@ -28,14 +28,10 @@ jobs:
         run: npm install -g axios
 
       #6
-      - name: install dependencies
-        run: npm install
-
-      #7
       - name: Run Test
         run: npm test
 
-      #8
+      #7
       - name: Stop
         if: always() 
         run: docker-compose down
