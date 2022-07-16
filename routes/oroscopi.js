@@ -31,14 +31,14 @@ router.get('/add', ensureAuth, (req, res) => {
  *   __v: 0
  * }
  * 
- * @apiError OroscopeNotFound The Id of the oroscope is not found.
+ * @apiError HoroscopeNotFound The Id of the horoscope is not found.
  *
  * @apiErrorExample Error-Response:
  * 
  * HTTP/1.1 404 Not Found
  * 
  * {
- *   "error": "OroscopeNotFound"
+ *   "error": "HoroscopeNotFound"
  * }
  */
 
@@ -88,13 +88,13 @@ router.post('/', ensureAuth, async (req, res) => {
  *   __v: 0
  * }
  * 
- * @apiError OroscopeNotFound The Id of the oroscope is not found.
+ * @apiError HoroscopeNotFound The Id of the horoscope is not found.
  * 
  * @apiErrorExample Error-Response:
  * 
  * HTTP/1.1 404 Not Found
  * {
- *   "error": "OroscopeNotFound"
+ *   "error": "HoroscopeNotFound"
  * }
  */
 
@@ -134,14 +134,14 @@ router.get('/', ensureAuth, async (req, res) => {
  *   __v: 0
  * }
  * 
- * @apiError OroscopeNotFound The Id of the oroscope is not found.
+ * @apiError HoroscopeNotFound The Id of the horoscope is not found.
  *
  * @apiErrorExample Error-Response:
  * 
  * HTTP/1.1 404 Not Found
  * 
  * {
- *   "error": "OroscopeNotFound"
+ *   "error": "HoroscopeNotFound"
  * }
  */
 
@@ -255,14 +255,14 @@ router.get('/save/:id', ensureAuth, async (req, res) => {
  *   __v: 0
  * }
  * 
- * @apiError OroscopeNotFound The Id of the oroscope is not found.
+ * @apiError HoroscopeNotFound The Id of the horoscope is not found.
  *
  * @apiErrorExample Error-Response:
  * 
  * HTTP/1.1 404 Not Found
  * 
  * {
- *   "error": "OroscopeNotFound"
+ *   "error": "HoroscopeNotFound"
  * }
  */
 
@@ -311,14 +311,14 @@ router.put('/:id', ensureAuth, async (req, res) => {
  *   __v: 0
  * }
  * 
- * @apiError OroscopeNotFound The Id of the oroscope is not found.
+ * @apiError HoroscopeNotFound The Id of the horoscope is not found.
  *
  * @apiErrorExample Error-Response:
  * 
  * HTTP/1.1 404 Not Found
  * 
  * {
- *   "error": "OroscopeNotFound"
+ *   "error": "HoroscopeNotFound"
  * }
  */
 
