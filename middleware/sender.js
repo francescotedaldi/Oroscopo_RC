@@ -19,7 +19,7 @@ module.exports = {
                 channel.assertQueue(QUEUE);
                 console.log('[SENDER] Step 3: Coda creata!')
                 // Step 4: Send message to queue
-                channel.sendToQueue(QUEUE, Buffer.from('Ciao, questo è un messaggio di prova'));
+                channel.sendToQueue(QUEUE, Buffer.from('Login effettuato con successo!'));
                 console.log('[SENDER] Step 4: Messaggio inviato!');
             })
         })
