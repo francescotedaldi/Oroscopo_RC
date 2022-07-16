@@ -2,9 +2,9 @@
 
 ## Autori
 Questa applicazione è stata sviluppata interamente da studenti del corso di Reti di Calcolatori dell' università di Roma "La Sapienza".
-Francesco Tedaldi - 1852733
-Daniele Teodori - 1657325
-Giovanni Milletti - 1884164
+- Francesco Tedaldi - 1852733
+- Daniele Teodori - 1657325
+- Giovanni Milletti - 1884164
 
 ## Architettura
 
