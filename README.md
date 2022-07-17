@@ -67,6 +67,10 @@ docker-compose stop
 docker-compose start -d
 ```
 
+## Utilizzo
+
+Per utilizzare l'applicazione aprire un browser e andare su [https://localhost:443](https://localhost:443)
+
 ## Test
 
 Per avviare i test posizionarsi nella cartella Oroscopo_RC e digitare il seguente comando:
